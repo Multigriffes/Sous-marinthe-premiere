@@ -1,5 +1,7 @@
 from random import randint
 
+isplay=True
+pos_joueur_init=[0,0]
 map1=([("1011"),("0110"),("1011"),("0011"),("0110")],
 [("1010"),("0101"),("1110"),("1110"),("1100")],
 [("1001"),("0010"),("0000"),("0001"),("0101")],
@@ -24,11 +26,6 @@ def creation_grille_joueur(taille_grille:int=5,pos_joueur:list=[]):
     grille_mures=map1 #à gérer pour changement de map
     return [grille_joueur,grille_mures,pos_joueur]
 
-#MàJ variables globales
-info_init=creation_grille_joueur()
-grille_joueur=info_init[0]
-grille_mures=info_init[1]
-pos_joueur=info_init[2]
 
 #Déplacement
 def mouvement(direction:str,grille_joueur,grille_mures,pos_joueur):
@@ -38,10 +35,23 @@ def mouvement(direction:str,grille_joueur,grille_mures,pos_joueur):
             pos_joueur[0]+=1
             grille_joueur[pos_joueur[0]][pos_joueur[1]]="O"
             return [grille_joueur,pos_joueur]
+        else:
+            print("C'est un mur !!! p'tite merde")
+            grille_joueur[pos_joueur[0]][pos_joueur[1]]="*"
+            pos_joueur=pos_joueur_init
+            grille_joueur[pos_joueur[0]][pos_joueur[1]]="O"
+            return [grille_joueur,pos_joueur]
+
     elif direction=="g" or direction=="gauche":
         if grille_mures[pos_joueur[0]][pos_joueur[1]][0]==0:
             grille_joueur[pos_joueur[0]][pos_joueur[1]]="*"
             pos_joueur[0]-=1
+            grille_joueur[pos_joueur[0]][pos_joueur[1]]="O"
+            return [grille_joueur,pos_joueur]
+        else:
+            print("C'est un mur !!! p'tite merde")
+            grille_joueur[pos_joueur[0]][pos_joueur[1]]="*"
+            pos_joueur=pos_joueur_init
             grille_joueur[pos_joueur[0]][pos_joueur[1]]="O"
             return [grille_joueur,pos_joueur]
     elif direction=="b" or direction=="bas":
@@ -50,21 +60,47 @@ def mouvement(direction:str,grille_joueur,grille_mures,pos_joueur):
             pos_joueur[1]-=1
             grille_joueur[pos_joueur[0]][pos_joueur[1]]="O"
             return [grille_joueur,pos_joueur]
+        else:
+            print("C'est un mur !!! p'tite merde")
+            grille_joueur[pos_joueur[0]][pos_joueur[1]]="*"
+            pos_joueur=pos_joueur_init
+            grille_joueur[pos_joueur[0]][pos_joueur[1]]="O"
+            return [grille_joueur,pos_joueur]
     elif direction=="h" or direction=="haut":
         if grille_mures[pos_joueur[0]][pos_joueur[1]][2]==0:
             grille_joueur[pos_joueur[0]][pos_joueur[1]]="*"
             pos_joueur[1]+=1
             grille_joueur[pos_joueur[0]][pos_joueur[1]]="O"
             return [grille_joueur,pos_joueur]
+        else:
+            print("C'est un mur !!! p'tite merde")
+            grille_joueur[pos_joueur[0]][pos_joueur[1]]="*"
+            pos_joueur=pos_joueur_init
+            grille_joueur[pos_joueur[0]][pos_joueur[1]]="O"
+            return [grille_joueur,pos_joueur]
     else:
         print("la direction n'est pas reconnu")
 
-direction=input("Direction souhaitée : ")
 
-#MàJ variables globales
-info_mouv=mouvement(direction,grille_joueur,grille_mures,pos_joueur)
-grille_joueur=info_init[0]
-pos_joueur=info_init[1]
+def play():    
+    #Instruction :
+    #Init :
+    taille_grille=input("Taille de la grille souhaitée : ")
+    creation_grille_joueur()
+    #MàJ variables globales
+    info_init=creation_grille_joueur()
+    grille_joueur=info_init[0]
+    grille_mures=info_init[1]
+    pos_joueur=info_init[2]
+    pos_joueur_init=pos_joueur
+    #Boucle de jeu/déplacement
+    while isplay:
+        direction=input("Direction souhaitée : ")
+        mouvement(direction,grille_joueur,grille_mures,pos_joueur)
+        #MàJ variables globales
+        info_mouv=mouvement(direction,grille_joueur,grille_mures,pos_joueur)
+        grille_joueur=info_init[0]
+        pos_joueur=info_init[1]
 
 #print(info_init)
 #print(grille_joueur)
