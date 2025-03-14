@@ -23,3 +23,19 @@ Map test 5*5 :
 [("1101"),("1011"),("0001"),("0011"),("0101")])
 
 Fonction creation_grille_joueur :
+
+def creation_grille_joueur(taille_grille:int=5,pos_joueur:list=[]):
+    
+    if pos_joueur==[]:
+        pos_joueur=[randint(0,taille_grille-1),randint(0,taille_grille-1)]
+    grille_joueur=[["*" for b in range(taille_grille)] for a in range(taille_grille)]
+    grille_joueur[pos_joueur[0]][pos_joueur[1]]="O"
+
+    doc :
+
+    Si la position du joueur n'est pas donné, on le place aléatoirement avec "randint"
+
+    Ensuite on créé la grille grâce à la "taille_grille" qui est à 5 de base
+    on créé d'abord une ligne puis on dublique cette ligne pour former une grille
+
+    On place ensuite le joueur avec son "O" par rapport a sa position (x,y) qui correspond a (0,1)
