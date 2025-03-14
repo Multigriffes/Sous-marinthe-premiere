@@ -1,0 +1,16 @@
+Documentation :
+
+Partie 1 - Génération :
+
+Modification de la gestion de la sauvegarde de la grille :
+
+    utilisation d'un identifiant unique en string binaire pour chaque case
+
+    ([("string binaire"),("exemple"),("0101")],
+    [("0000"),("0000"),("0000")],
+    [("0000"),("0000"),("0000")])
+
+    on parcours ensuite la str, si c'est 0 pas de mur si c'est 1 on met un mur
+
+    "0000" correspond à "gauche,droite,haut,bas"
+
