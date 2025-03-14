@@ -3,6 +3,7 @@ from random import randint
 isplay=True
 pos_joueur_init=[0,0]
 nbr_cases_touche=0
+nbr_etoiles_touche=0
 map1=([("1011"),("0110"),("1011"),("0011"),("0110")],
 [("1010"),("0101"),("1110"),("1110"),("1100")],
 [("1001"),("0010"),("0000"),("0001"),("0101")],
@@ -30,51 +31,67 @@ def creation_grille_joueur(taille_grille:int=5,pos_joueur:list=[]):
 
 
 #Déplacement
-def mouvement(direction:str,grille_joueur,grille_mures,pos_joueur,nbr_cases_touche):
+def mouvement(direction:str,grille_joueur,grille_mures,pos_joueur,nbr_cases_touche,nbr_etoiles_touche):
     if direction=="d" or direction=="droite":
         if grille_mures[pos_joueur[0]][pos_joueur[1]][1]=="0":
-            grille_joueur[pos_joueur[0]][pos_joueur[1]]="*"
+            if grille_joueur[pos_joueur[0]][pos_joueur[1]]=="*":
+                grille_joueur[pos_joueur[0]][pos_joueur[1]]=""
+                nbr_etoiles_touche+=1
+            else:
+                grille_joueur[pos_joueur[0]][pos_joueur[1]]=""
             pos_joueur[1]+=1
             grille_joueur[pos_joueur[0]][pos_joueur[1]]="O"
-            return [grille_joueur,pos_joueur,nbr_cases_touche]
+            return [grille_joueur,pos_joueur,nbr_cases_touche,nbr_etoiles_touche]
         else:
             print("C'est un mur !!! p'tite merde d")
             nbr_cases_touche+=1
-            return [grille_joueur,pos_joueur,nbr_cases_touche]
+            return [grille_joueur,pos_joueur,nbr_cases_touche,nbr_etoiles_touche]
 
     elif direction=="g" or direction=="gauche":
         if grille_mures[pos_joueur[0]][pos_joueur[1]][0]=="0":
-            grille_joueur[pos_joueur[0]][pos_joueur[1]]="*"
+            if grille_joueur[pos_joueur[0]][pos_joueur[1]]=="*":
+                grille_joueur[pos_joueur[0]][pos_joueur[1]]=""
+                nbr_etoiles_touche+=1
+            else:
+                grille_joueur[pos_joueur[0]][pos_joueur[1]]=""
             pos_joueur[1]-=1
             grille_joueur[pos_joueur[0]][pos_joueur[1]]="O"
-            return [grille_joueur,pos_joueur,nbr_cases_touche]
+            return [grille_joueur,pos_joueur,nbr_cases_touche,nbr_etoiles_touche]
         else:
             print("C'est un mur !!! p'tite merde g")
             nbr_cases_touche+=1
-            return [grille_joueur,pos_joueur,nbr_cases_touche]
+            return [grille_joueur,pos_joueur,nbr_cases_touche,nbr_etoiles_touche]
     elif direction=="b" or direction=="bas":
         if grille_mures[pos_joueur[0]][pos_joueur[1]][3]=="0":
-            grille_joueur[pos_joueur[0]][pos_joueur[1]]="*"
+            if grille_joueur[pos_joueur[0]][pos_joueur[1]]=="*":
+                grille_joueur[pos_joueur[0]][pos_joueur[1]]=""
+                nbr_etoiles_touche+=1
+            else:
+                grille_joueur[pos_joueur[0]][pos_joueur[1]]=""
             pos_joueur[0]+=1
             grille_joueur[pos_joueur[0]][pos_joueur[1]]="O"
-            return [grille_joueur,pos_joueur,nbr_cases_touche]
+            return [grille_joueur,pos_joueur,nbr_cases_touche,nbr_etoiles_touche]
         else:
             print("C'est un mur !!! p'tite merde b")
             nbr_cases_touche+=1
-            return [grille_joueur,pos_joueur,nbr_cases_touche]
+            return [grille_joueur,pos_joueur,nbr_cases_touche,nbr_etoiles_touche]
     elif direction=="h" or direction=="haut":
         if grille_mures[pos_joueur[0]][pos_joueur[1]][2]=="0":
-            grille_joueur[pos_joueur[0]][pos_joueur[1]]="*"
+            if grille_joueur[pos_joueur[0]][pos_joueur[1]]=="*":
+                grille_joueur[pos_joueur[0]][pos_joueur[1]]=""
+                nbr_etoiles_touche+=1
+            else:
+                grille_joueur[pos_joueur[0]][pos_joueur[1]]=""
             pos_joueur[0]-=1
             grille_joueur[pos_joueur[0]][pos_joueur[1]]="O"
-            return [grille_joueur,pos_joueur,nbr_cases_touche]
+            return [grille_joueur,pos_joueur,nbr_cases_touche,nbr_etoiles_touche]
         else:
             print("C'est un mur !!! p'tite merde h")
             nbr_cases_touche+=1
-            return [grille_joueur,pos_joueur,nbr_cases_touche]
+            return [grille_joueur,pos_joueur,nbr_cases_touche,nbr_etoiles_touche]
     else:
         print("La direction n'est pas reconnu")
-        return [grille_joueur,pos_joueur,nbr_cases_touche]
+        return [grille_joueur,pos_joueur,nbr_cases_touche,nbr_etoiles_touche]
 
 
 def play():
@@ -102,7 +119,7 @@ def play():
             print(nbr_cases_touche)
 
         #MàJ variables globales
-        info_mouv=mouvement(direction,grille_joueur,grille_mures,pos_joueur,nbr_cases_touche)
+        info_mouv=mouvement(direction,grille_joueur,grille_mures,pos_joueur,nbr_cases_touche,nbr_etoiles_touche)
         grille_joueur=info_mouv[0]
         pos_joueur=info_mouv[1]
         nbr_cases_touche=info_mouv[2]
