@@ -22,7 +22,7 @@ Map test 5*5 :
 [("1010"),("0101"),("1000"),("0111"),("1110")],
 [("1101"),("1011"),("0001"),("0011"),("0101")])
 
-Fonction creation_grille_joueur :
+Fonction création de la grille :
 
 def creation_grille_joueur(taille_grille:int=5,pos_joueur:list=[]):
     
@@ -39,3 +39,7 @@ def creation_grille_joueur(taille_grille:int=5,pos_joueur:list=[]):
     on créé d'abord une ligne puis on dublique cette ligne pour former une grille
 
     On place ensuite le joueur avec son "O" par rapport a sa position (x,y) qui correspond a (0,1)
+
+    On décide quel patterne de mur on utilise celon la map
+
+Fonction de déplacement :
