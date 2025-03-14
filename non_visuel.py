@@ -24,11 +24,13 @@ def creation_grille_joueur(taille_grille:int=5,pos_joueur:list=[]):
     grille_mures=map1 #à gérer pour changement de map
     return [grille_joueur,grille_mures,pos_joueur]
 
+#MàJ variables globales
 info_init=creation_grille_joueur()
 grille_joueur=info_init[0]
 grille_mures=info_init[1]
 pos_joueur=info_init[2]
 
+#Déplacement
 def mouvement(direction:str,grille_joueur,grille_mures,pos_joueur):
     if direction=="d" or direction=="droite":
         if grille_mures[pos_joueur[0]][pos_joueur[1]][1]==0:
@@ -57,10 +59,15 @@ def mouvement(direction:str,grille_joueur,grille_mures,pos_joueur):
     else:
         print("la direction n'est pas reconnu")
 
+direction=input("Direction souhaitée : ")
+
+#MàJ variables globales
+info_mouv=mouvement(direction,grille_joueur,grille_mures,pos_joueur)
+grille_joueur=info_init[0]
+pos_joueur=info_init[1]
 
 #print(info_init)
 #print(grille_joueur)
 #print(grille_mures)
 #print(pos_joueur)
 
-#Déplacement
