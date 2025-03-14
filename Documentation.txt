@@ -12,7 +12,7 @@ Modification de la gestion de la sauvegarde de la grille :
 
     on parcours ensuite la str, si c'est 0 pas de mur si c'est 1 on met un mur
 
-    "0000" correspond à "gauche,droite,haut,bas"
+    "0,0,0,0" correspond à "gauche,droite,haut,bas"
 
 Map test 5*5 :
 
@@ -20,4 +20,6 @@ Map test 5*5 :
 [("1010"),("0101"),("1110"),("1110"),("1100")],
 [("1001"),("0010"),("0000"),("0001"),("0101")],
 [("1010"),("0101"),("1000"),("0111"),("1110")],
-[(""),(""),(""),(""),("")])
+[("1101"),("1011"),("0001"),("0011"),("0101")])
+
+Fonction creation_grille_joueur :
