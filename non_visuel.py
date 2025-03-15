@@ -29,7 +29,7 @@ def creation_grille_joueur(taille_grille:int=5,pos_joueur:list=[]):
 
 
 #Déplacement
-def mouvement(direction:str,grille_joueur,grille_mures,pos_joueur,nbr_cases_touche,nbr_etoiles_touche):
+def action(direction:str,grille_joueur,grille_mures,pos_joueur,nbr_cases_touche,nbr_etoiles_touche):
     
     #Droite
     if direction=="d" or direction=="droite":
@@ -120,7 +120,7 @@ def play():
         direction=input("Direction souhaitée : ")
         
         #Déplacement et MàJ des variables
-        info_mouv=mouvement(direction,grille_joueur,grille_mures,pos_joueur,nbr_cases_touche,nbr_etoiles_touche)
+        info_mouv=action(direction,grille_joueur,grille_mures,pos_joueur,nbr_cases_touche,nbr_etoiles_touche)
         grille_joueur=info_mouv[0]
         pos_joueur=info_mouv[1]
         nbr_cases_touche=info_mouv[2]
