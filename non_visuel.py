@@ -105,7 +105,7 @@ def play():
     pos_joueur=list(input("Position du joueur initiale si souhaité sinon laisser vide : "))
     info_init=creation_grille_joueur(taille_grille,pos_joueur)
     grille_joueur=info_init[0]
-    grille_mures=info_init[1]
+    grille_murs=info_init[1]
     pos_joueur=info_init[2]
 
     #Boucle de jeu
@@ -114,13 +114,13 @@ def play():
         for i in range(taille_grille):
             print(grille_joueur[i])
         for i in range(taille_grille):
-            print(grille_mures[i])
+            print(grille_murs[i])
         
         #Input du joueur
         direction=input("Direction souhaitée : ")
         
         #Déplacement et MàJ des variables
-        info_mouv=action(direction,grille_joueur,grille_mures,pos_joueur,nbr_cases_touche,nbr_etoiles_touche)
+        info_mouv=action(direction,grille_joueur,grille_murs,pos_joueur,nbr_cases_touche,nbr_etoiles_touche)
         grille_joueur=info_mouv[0]
         pos_joueur=info_mouv[1]
         nbr_cases_touche=info_mouv[2]
@@ -128,7 +128,7 @@ def play():
     
         #Debug
         if direction=="u":
-            print(grille_mures[pos_joueur[0]][pos_joueur[1]][0],grille_mures[pos_joueur[0]][pos_joueur[1]][1],grille_mures[pos_joueur[0]][pos_joueur[1]][2],grille_mures[pos_joueur[0]][pos_joueur[1]][3])
+            print(grille_murs[pos_joueur[0]][pos_joueur[1]][0],grille_murs[pos_joueur[0]][pos_joueur[1]][1],grille_murs[pos_joueur[0]][pos_joueur[1]][2],grille_murs[pos_joueur[0]][pos_joueur[1]][3])
             print(nbr_cases_touche,nbr_etoiles_touche)
         elif direction=="q" or direction=="quitte" or direction=="quit":
             isplay=False
