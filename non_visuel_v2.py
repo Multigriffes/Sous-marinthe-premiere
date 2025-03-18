@@ -94,8 +94,8 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
 def play():
     nbr_etoiles,nbr_murs=0,0
     isPlay=True
-    taille_grille=input("Taille de la grille souhaitée : ")
-    pos_joueur=input("Position du joueur initiale si souhaité sinon laisser vide : ")
+    taille_grille=int(input("Taille de la grille souhaitée : "))
+    pos_joueur=list(input("Position du joueur initiale si souhaité sinon laisser vide : "))
     info_init=creation_grille_joueur(taille_grille,pos_joueur)
     grille_joueur=info_init[0]
     grille_murs=info_init[1]
