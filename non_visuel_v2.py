@@ -50,7 +50,7 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
             print("C'est un MUR CHEHHHHH !!!!!!!!!!")
             nbr_murs+=1
             return [grille_joueur,pos_joueur,nbr_etoiles,nbr_murs]
-    elif commande=="g" or commande=="gauche":
+    elif commande=="g" or commande=="gauche" or commande=="q":
         if grille_murs[pos_joueur[1]][pos_joueur[0]][0]=="0":
             grille_joueur[pos_joueur[1]][pos_joueur[0]]=""
             pos_joueur[0]-=1
@@ -62,7 +62,7 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
             print("C'est un MUR CHEHHHHH !!!!!!!!!!")
             nbr_murs+=1
             return [grille_joueur,pos_joueur,nbr_etoiles,nbr_murs]
-    elif commande=="h" or commande=="haut":
+    elif commande=="h" or commande=="haut" or commande=="z":
         if grille_murs[pos_joueur[1]][pos_joueur[0]][2]=="0":
             grille_joueur[pos_joueur[1]][pos_joueur[0]]=""
             pos_joueur[1]-=1
@@ -74,7 +74,7 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
             print("C'est un MUR CHEHHHHH !!!!!!!!!!")
             nbr_murs+=1
             return [grille_joueur,pos_joueur,nbr_etoiles,nbr_murs]
-    elif commande=="b" or commande=="bas":
+    elif commande=="b" or commande=="bas" or commande=="s":
         if grille_murs[pos_joueur[1]][pos_joueur[0]][3]=="0":
             grille_joueur[pos_joueur[1]][pos_joueur[0]]=""
             pos_joueur[1]+=1
@@ -113,7 +113,7 @@ def play():
         pos_joueur=info_mouv[1]
         nbr_etoiles=info_mouv[2]
         nbr_murs=info_mouv[3]
-        if commande=="q" or commande=="quit":
+        if commande=="exit":
             isPlay=False
 
 play()
