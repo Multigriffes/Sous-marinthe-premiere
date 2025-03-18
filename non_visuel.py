@@ -25,7 +25,7 @@ def creation_grille_joueur(taille_grille:int=5,pos_joueur:list=[]):
 
     grille_mures=map1 #à gérer pour changement de map
     
-    rturn [greille_joueur,grille_mures,pos_joueur]
+    return [grille_joueur,grille_mures,pos_joueur]
 
 
 #Déplacement

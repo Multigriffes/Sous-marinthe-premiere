@@ -1,6 +1,6 @@
 from random import randint
 
-map1=([("1011"),("0110"),("1011"),("0011"),("0110")],
+map5=([("1011"),("0110"),("1011"),("0011"),("0110")],
 [("1010"),("0101"),("1110"),("1110"),("1100")],
 [("1001"),("0010"),("0000"),("0001"),("0101")],
 [("1010"),("0101"),("1000"),("0111"),("1110")],
@@ -27,7 +27,7 @@ def creation_grille_joueur(taille_grille:int=5,pos_joueur:list=[]):
     grille_joueur = [["*" for i in range(taille_grille)] for b in range(taille_grille)]
     grille_joueur[pos_joueur[1]][pos_joueur[0]] = "O"
 
-    grille_murs = map1 #à gérer pour changement de map
+    grille_murs = map5 #à gérer pour changement de map
 
     return [grille_joueur,grille_murs,pos_joueur]
 
