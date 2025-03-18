@@ -20,6 +20,4 @@ def creation_grille_joueur(taille_grille:int=5,pos_joueur:list=[]):
         pos_joueur = [randint(0,taille_grille-1), randint(0,taille_grille-1)]
     else :
         assert pos_joueur[0] <= taille_grille-1 or pos_joueur[1] <= taille_grille-1, "Position hors du terrain"
-
-print("jeu lancé")
-
+        assert len(pos_joueur) == 2 , "Y a 2 nombres pour une coordonnées en 2D idiots"
