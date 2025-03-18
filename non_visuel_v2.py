@@ -37,7 +37,6 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
     """
 
     assert type(commande) == str, "L'input n'est pas un string"
-    commande=commande.lower
     
     if commande=="d" or commande=="droite":
         if grille_murs[pos_joueur[1]][pos_joueur[0]][1]=="0":
