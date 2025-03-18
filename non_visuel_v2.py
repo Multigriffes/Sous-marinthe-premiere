@@ -12,8 +12,6 @@ def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
     Cette fonction créé la liste représentant la grille et représente le joueur dessus à l'aide 
     d'un "0" et les cases vides avec un "*"
     """
-    if taille_grille=="":
-        taille_grille=5
     
     assert type(taille_grille)==int ;"la taille de la grille n'est pas un int"
     assert type(pos_joueur)==list ;"la position du joueur n'est pas une liste"
@@ -97,6 +95,8 @@ def play():
     nbr_etoiles,nbr_murs=0,0
     isPlay=True
     taille_grille=input("Taille de la grille souhaitée : ")
+    if taille_grille=="":
+        taille_grille=5
     pos_joueur=list(input("Position du joueur initiale si souhaité sinon laisser vide : "))
     info_init=creation_grille_joueur(taille_grille,pos_joueur)
     grille_joueur=info_init[0]
