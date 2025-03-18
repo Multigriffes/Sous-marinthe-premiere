@@ -22,4 +22,11 @@ def creation_grille_joueur(taille_grille:int=5,pos_joueur:list=[]):
         assert pos_joueur[0] <= taille_grille-1 or pos_joueur[1] <= taille_grille-1, "Position hors du terrain"
         assert len(pos_joueur) == 2 , "Y a 2 nombres pour une coordonnées en 2D idiots"
 
-    
+    #creation de la grille du joueur :
+
+    grille_joueur = [["*" for i in range(taille_grille)] for b in range(taille_grille)]
+    grille_joueur[pos_joueur[1]][pos_joueur[0]] = "O"
+
+    grille_mures = map1
+
+    return [grille_joueur,grille_mures,pos_joueur]
