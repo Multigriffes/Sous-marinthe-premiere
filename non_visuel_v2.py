@@ -15,3 +15,11 @@ def creation_grille_joueur(taille_grille:int=5,pos_joueur:list=[]):
 
     assert type(taille_grille)==int ;"la taille de la grille n'est pas un int"
     assert type(pos_joueur)==list ;"la position du joueur n'est pas une liste"
+
+    if pos_joueur == [] :
+        pos_joueur = [randint(0,taille_grille-1), randint(0,taille_grille-1)]
+    else :
+        assert pos_joueur[0] <= taille_grille-1 or pos_joueur[1] <= taille_grille-1, "Position hors du terrain"
+
+print("jeu lancé")
+
