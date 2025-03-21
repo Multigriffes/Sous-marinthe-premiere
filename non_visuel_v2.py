@@ -19,10 +19,14 @@ def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
     #Nettoyage de la liste de string de la position
     a=0
     for i in range(len(pos_joueur)):
-            if type(pos_joueur[a])!=int:
-                del pos_joueur[a]
-            else:
-                a+=1
+        try:
+            int(pos_joueur[a])
+        except:
+            del pos_joueur[a]
+        else:
+            pos_joueur[a]=int(pos_joueur[a])
+            a+=1
+
     #Génération ou vérification des coordonnée du joueur
     if pos_joueur == [] :
         pos_joueur = [randint(0,taille_grille-1), randint(0,taille_grille-1)]
@@ -46,59 +50,53 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
 
     assert type(commande) == str, "L'input n'est pas un string"
     
-    if commande=="d" or commande=="droite":
-        if grille_murs[pos_joueur[1]][pos_joueur[0]][1]=="0":
-            grille_joueur[pos_joueur[1]][pos_joueur[0]]=""
-            pos_joueur[0]+=1
-            if grille_joueur[pos_joueur[1]][pos_joueur[0]]=="*":
-                nbr_etoiles+=1
-            grille_joueur[pos_joueur[1]][pos_joueur[0]]="O"
-            return [grille_joueur,pos_joueur,nbr_etoiles,nbr_murs]
+    for j in range(len(commande)):
+        if commande[j]=="d" or commande[j]=="droite":
+            if grille_murs[pos_joueur[1]][pos_joueur[0]][1]=="0":
+                grille_joueur[pos_joueur[1]][pos_joueur[0]]=" "
+                pos_joueur[0]+=1
+                if grille_joueur[pos_joueur[1]][pos_joueur[0]]=="*":
+                    nbr_etoiles+=1
+                grille_joueur[pos_joueur[1]][pos_joueur[0]]="O"
+            else:
+                print("C'est un MUR CHEHHHHH !!!!!!!!!!")
+                nbr_murs+=1
+        elif commande[j]=="g" or commande[j]=="gauche" or commande[j]=="q":
+            if grille_murs[pos_joueur[1]][pos_joueur[0]][0]=="0":
+                grille_joueur[pos_joueur[1]][pos_joueur[0]]=" "
+                pos_joueur[0]-=1
+                if grille_joueur[pos_joueur[1]][pos_joueur[0]]=="*":
+                    nbr_etoiles+=1
+                grille_joueur[pos_joueur[1]][pos_joueur[0]]="O"
+            else:
+                print("C'est un MUR CHEHHHHH !!!!!!!!!!")
+                nbr_murs+=1
+        elif commande[j]=="h" or commande[j]=="haut" or commande[j]=="z":
+            if grille_murs[pos_joueur[1]][pos_joueur[0]][2]=="0":
+                grille_joueur[pos_joueur[1]][pos_joueur[0]]=" "
+                pos_joueur[1]-=1
+                if grille_joueur[pos_joueur[1]][pos_joueur[0]]=="*":
+                    nbr_etoiles+=1
+                grille_joueur[pos_joueur[1]][pos_joueur[0]]="O"
+            else:
+                print("C'est un MUR CHEHHHHH !!!!!!!!!!")
+                nbr_murs+=1
+        elif commande[j]=="b" or commande[j]=="bas" or commande[j]=="s":
+            if grille_murs[pos_joueur[1]][pos_joueur[0]][3]=="0":
+                grille_joueur[pos_joueur[1]][pos_joueur[0]]=" "
+                pos_joueur[1]+=1
+                if grille_joueur[pos_joueur[1]][pos_joueur[0]]=="*":
+                    nbr_etoiles+=1
+                grille_joueur[pos_joueur[1]][pos_joueur[0]]="O"
+            else:
+                print("C'est un MUR CHEHHHHH !!!!!!!!!!")
+                nbr_murs+=1
         else:
-            print("C'est un MUR CHEHHHHH !!!!!!!!!!")
-            nbr_murs+=1
-            return [grille_joueur,pos_joueur,nbr_etoiles,nbr_murs]
-    elif commande=="g" or commande=="gauche" or commande=="q":
-        if grille_murs[pos_joueur[1]][pos_joueur[0]][0]=="0":
-            grille_joueur[pos_joueur[1]][pos_joueur[0]]=""
-            pos_joueur[0]-=1
-            if grille_joueur[pos_joueur[1]][pos_joueur[0]]=="*":
-                nbr_etoiles+=1
-            grille_joueur[pos_joueur[1]][pos_joueur[0]]="O"
-            return [grille_joueur,pos_joueur,nbr_etoiles,nbr_murs]
-        else:
-            print("C'est un MUR CHEHHHHH !!!!!!!!!!")
-            nbr_murs+=1
-            return [grille_joueur,pos_joueur,nbr_etoiles,nbr_murs]
-    elif commande=="h" or commande=="haut" or commande=="z":
-        if grille_murs[pos_joueur[1]][pos_joueur[0]][2]=="0":
-            grille_joueur[pos_joueur[1]][pos_joueur[0]]=""
-            pos_joueur[1]-=1
-            if grille_joueur[pos_joueur[1]][pos_joueur[0]]=="*":
-                nbr_etoiles+=1
-            grille_joueur[pos_joueur[1]][pos_joueur[0]]="O"
-            return [grille_joueur,pos_joueur,nbr_etoiles,nbr_murs]
-        else:
-            print("C'est un MUR CHEHHHHH !!!!!!!!!!")
-            nbr_murs+=1
-            return [grille_joueur,pos_joueur,nbr_etoiles,nbr_murs]
-    elif commande=="b" or commande=="bas" or commande=="s":
-        if grille_murs[pos_joueur[1]][pos_joueur[0]][3]=="0":
-            grille_joueur[pos_joueur[1]][pos_joueur[0]]=""
-            pos_joueur[1]+=1
-            if grille_joueur[pos_joueur[1]][pos_joueur[0]]=="*":
-                nbr_etoiles+=1
-            grille_joueur[pos_joueur[1]][pos_joueur[0]]="O"
-            return [grille_joueur,pos_joueur,nbr_etoiles,nbr_murs]
-        else:
-            print("C'est un MUR CHEHHHHH !!!!!!!!!!")
-            nbr_murs+=1
-            return [grille_joueur,pos_joueur,nbr_etoiles,nbr_murs]
-    else:
-        print("La direction n'est pas reconnu")
-        return [grille_joueur,pos_joueur,nbr_etoiles,nbr_murs]
+            print("La direction n'est pas reconnu")
+    return [grille_joueur,pos_joueur,nbr_etoiles,nbr_murs]
     
 def play():
+    #Initialisation avec input joueur
     nbr_etoiles,nbr_murs=0,0
     isPlay=True
     taille_grille=""
@@ -115,8 +113,14 @@ def play():
         #Affichage
         for i in range(taille_grille):
             print(grille_joueur[i])
-
-        commande=str(input("Action souhaitée : "))
+        print("Nombres d'étoiles obtenues : ", nbr_etoiles)
+        print("Nombres de murs touchés : ", nbr_murs)
+        
+        #Instructions de jeu et mise à jour des variables
+        commande=""
+        while commande=="":
+            commande=str(input("Action souhaitée : "))
+        commande=commande.lower()
         info_mouv=action(commande,grille_joueur,grille_murs,pos_joueur,nbr_etoiles,nbr_murs)
         grille_joueur=info_mouv[0]
         pos_joueur=info_mouv[1]
