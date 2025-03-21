@@ -1,10 +1,5 @@
 from random import randint
-
-map5=([("1011"),("0110"),("1011"),("0011"),("0110")],
-[("1010"),("0101"),("1110"),("1110"),("1100")],
-[("1001"),("0010"),("0000"),("0001"),("0101")],
-[("1010"),("0101"),("1000"),("0111"),("1110")],
-[("1101"),("1011"),("0001"),("0011"),("0101")])
+liste_map=['1111', (('1011', '0110'), ('1011', '0101')), (('1010', '0010', '0111'), ('1100', '1000', '0111'), ('1101', '1001', '0111')), (('1010', '0010', '0110', '1110'), ('1000', '0101', '1000', '0100'), ('1100', '1011', '0100', '1100'), ('1001', '0111', '1001', '0101')), (('1011', '0110', '1011', '0011', '0110'), ('1010', '0101', '1110', '1110', '1100'), ('1001', '0010', '0000', '0001', '0101'), ('1010', '0101', '1000', '0111', '1110'), ('1101', '1011', '0001', '0011', '0101')), (('1110', '1110', '1011', '0010', '0111', '1110'), ('1100', '1001', '0010', '0101', '1010', '0101'), ('1000', '0010', '0100', '1010', '0000', '0110'), ('1000', '0101', '1000', '0000', '0101', '1100'), ('1100', '1011', '0001', '0100', '1011', '0101'), ('1001', '0011', '0111', '1001', '0011', '0111'))]
 
 #Creation des grilles
 def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
@@ -15,6 +10,7 @@ def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
     
     assert type(taille_grille)==int ;"la taille de la grille n'est pas un int"
     assert type(pos_joueur)==list ;"la position du joueur n'est pas une liste"
+    assert taille_grille<15 ;"On a pas autant de map que ça, 15 pas plus"
 
     #Nettoyage de la liste de string de la position
     a=0
@@ -39,7 +35,7 @@ def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
     grille_joueur[pos_joueur[1]][pos_joueur[0]] = "O"
 
     #Choix de le map en fonction du nbr de cases
-    grille_murs = map5 #à gérer pour changement de map
+    grille_murs = liste_map[taille_grille-1] #à gérer pour changement de map
 
     return [grille_joueur,grille_murs,pos_joueur]
 
@@ -111,10 +107,12 @@ def play():
 
     while isPlay:
         #Affichage
+        print("=====================================")
         for i in range(taille_grille):
             print(grille_joueur[i])
         print("Nombres d'étoiles obtenues : ", nbr_etoiles)
         print("Nombres de murs touchés : ", nbr_murs)
+        print("=====================================")
         
         #Instructions de jeu et mise à jour des variables
         commande=""
