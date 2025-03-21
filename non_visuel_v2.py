@@ -16,17 +16,25 @@ def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
     assert type(taille_grille)==int ;"la taille de la grille n'est pas un int"
     assert type(pos_joueur)==list ;"la position du joueur n'est pas une liste"
 
+    #Nettoyage de la liste de string de la position
+    a=0
+    for i in range(len(pos_joueur)):
+            if type(pos_joueur[a])!=int:
+                del pos_joueur[a]
+            else:
+                a+=1
+    #Génération ou vérification des coordonnée du joueur
     if pos_joueur == [] :
         pos_joueur = [randint(0,taille_grille-1), randint(0,taille_grille-1)]
     else :
         assert pos_joueur[0] <= taille_grille-1 or pos_joueur[1] <= taille_grille-1, "Position hors du terrain"
         assert len(pos_joueur) == 2 , "Y a 2 nombres pour une coordonnées en 2D idiots"
 
-    #creation de la grille du joueur :
-
+    #Creation de la grille du joueur
     grille_joueur = [["*" for i in range(taille_grille)] for b in range(taille_grille)]
     grille_joueur[pos_joueur[1]][pos_joueur[0]] = "O"
 
+    #Choix de le map en fonction du nbr de cases
     grille_murs = map5 #à gérer pour changement de map
 
     return [grille_joueur,grille_murs,pos_joueur]
@@ -93,9 +101,10 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
 def play():
     nbr_etoiles,nbr_murs=0,0
     isPlay=True
-    taille_grille=input("Taille de la grille souhaitée : ")
-    if taille_grille=="":
-        taille_grille=5
+    taille_grille=""
+    while taille_grille=="":
+        taille_grille=input("Taille de la grille souhaitée : ")
+    taille_grille=int(taille_grille)
     pos_joueur=list(input("Position du joueur initiale si souhaité sinon laisser vide : "))
     info_init=creation_grille_joueur(taille_grille,pos_joueur)
     grille_joueur=info_init[0]
