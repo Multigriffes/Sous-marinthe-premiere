@@ -35,7 +35,7 @@ def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
     grille_joueur[pos_joueur[1]][pos_joueur[0]] = "O"
 
     #Choix de le map en fonction du nbr de cases
-    grille_murs = liste_map[taille_grille-1] #à gérer pour changement de map
+    grille_murs = liste_map[taille_grille-1][randint(0,len(liste_map[taille_grille-1]-1))]
 
     return [grille_joueur,grille_murs,pos_joueur]
 
