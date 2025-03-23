@@ -46,8 +46,8 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
 
     assert type(commande) == str, "L'input n'est pas un string"
     
-    for j in range(len(commande)):
-        if commande[j]=="d" or commande[j]=="droite":
+    for j in commande:
+        if j=="d" or j=="droite":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][1]=="0":
                 grille_joueur[pos_joueur[1]][pos_joueur[0]]=" "
                 pos_joueur[0]+=1
@@ -57,7 +57,7 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
             else:
                 print("C'est un MUR CHEHHHHH !!!!!!!!!!")
                 nbr_murs+=1
-        elif commande[j]=="g" or commande[j]=="gauche" or commande[j]=="q":
+        elif j=="g" or j=="gauche" or j=="q":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][0]=="0":
                 grille_joueur[pos_joueur[1]][pos_joueur[0]]=" "
                 pos_joueur[0]-=1
@@ -67,7 +67,7 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
             else:
                 print("C'est un MUR CHEHHHHH !!!!!!!!!!")
                 nbr_murs+=1
-        elif commande[j]=="h" or commande[j]=="haut" or commande[j]=="z":
+        elif j=="h" or j=="haut" or j=="z":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][2]=="0":
                 grille_joueur[pos_joueur[1]][pos_joueur[0]]=" "
                 pos_joueur[1]-=1
@@ -77,7 +77,7 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
             else:
                 print("C'est un MUR CHEHHHHH !!!!!!!!!!")
                 nbr_murs+=1
-        elif commande[j]=="b" or commande[j]=="bas" or commande[j]=="s":
+        elif j=="b" or j=="bas" or j=="s":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][3]=="0":
                 grille_joueur[pos_joueur[1]][pos_joueur[0]]=" "
                 pos_joueur[1]+=1
@@ -88,22 +88,18 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
                 print("C'est un MUR CHEHHHHH !!!!!!!!!!")
                 nbr_murs+=1
         else:
-            print("La direction n'est pas reconnu")
+            print("La commande n'est pas reconnu")
     return [grille_joueur,pos_joueur,nbr_etoiles,nbr_murs]
     
 def play():
     #Initialisation avec input joueur
-    nbr_etoiles,nbr_murs=0,0
-    isPlay=True
-    taille_grille=""
+    nbr_etoiles,nbr_murs,isPlay,taille_grille=0,0,True,""
     while taille_grille=="":
         taille_grille=input("Taille de la grille souhaitée : ")
     taille_grille=int(taille_grille)
     pos_joueur=list(input("Position du joueur initiale si souhaité sinon laisser vide : "))
     info_init=creation_grille_joueur(taille_grille,pos_joueur)
-    grille_joueur=info_init[0]
-    grille_murs=info_init[1]
-    pos_joueur=info_init[2]
+    grille_joueur,grille_murs,pos_joueur=info_init[0],info_init[1],info_init[2]
 
     while isPlay:
         #Affichage
@@ -122,12 +118,10 @@ def play():
         
         if commande=="exit":
             isPlay=False
-        
+
         info_mouv=action(commande,grille_joueur,grille_murs,pos_joueur,nbr_etoiles,nbr_murs)
-        grille_joueur=info_mouv[0]
-        pos_joueur=info_mouv[1]
-        nbr_etoiles=info_mouv[2]
-        nbr_murs=info_mouv[3]
+        grille_joueur,pos_joueur,nbr_etoiles,nbr_murs=info_mouv[0],info_mouv[1],info_mouv[2],info_mouv[3]
+
         if nbr_etoiles==taille_grille**2-1:
             print("Bien joué, tu as touché",nbr_murs,"murs et attrapé",nbr_etoiles,"étoiles. GG ou pas")
             isPlay=False
