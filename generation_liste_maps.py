@@ -1,18 +1,18 @@
 def generation_liste():
-    map_2_1=(("1011","0110"),("1011","0101"))
+    map_2_1=(('1011', '0110'), ('1011', '0101'))
     map_2_2=(('1010', '0111'), ('1001', '0101'))
     map_2=(map_2_1,map_2_2)
-    map_3_1=(("1010","0010","0111"),("1100","1000","0111"),("1101","1001","0111"))
+    map_3_1=(('1010', '0010', '0111'), ('1100', '1000', '0111'), ('1101', '1001', '0111'))
     map_3_2=(('1011', '0110', '1110'), ('1110', '1000', '0100'), ('1001', '0101', '1101'))
     map_3=(map_3_1,map_3_2)
-    map_4_1=(("1010","0010","0110","1110"),("1000","0101","1000","0100"),("1100","1011","0100","1100"),("1001","0111","1001","0101"))
-    map_4_2=(("1010","0010","0110","1110"),("1000","0101","1000","0100"),("1100","1011","0100","1100"),("1001","0111","1001","0101"))
+    map_4_1=(('1010', '0010', '0110', '1110'), ('1000', '0101', '1000', '0100'), ('1100', '1011', '0100', '1100'), ('1001', '0111', '1001', '0101'))
+    map_4_2=(('1010', '0011', '0010', '0110'), ('1101', '1010', '0101', '1100'), ('1110', '1100', '1010', '0100'), ('1001', '0001', '0101', '1101'))
     map_4=(map_4_1,map_4_2)
-    map_5_1=(("1011","0110","1011","0011","0110"),("1010","0101","1110","1110","1100"),("1001","0010","0000","0001","0101"),("1010","0101","1000","0111","1110"),("1101","1011","0001","0011","0101"))
-    map_5_2=(("1011","0110","1011","0011","0110"),("1010","0101","1110","1110","1100"),("1001","0010","0000","0001","0101"),("1010","0101","1000","0111","1110"),("1101","1011","0001","0011","0101"))
+    map_5_1=(('1011', '0110', '1011', '0011', '0110'), ('1010', '0101', '1110', '1110', '1100'), ('1001', '0010', '0000', '0001', '0101'), ('1010', '0101', '1000', '0111', '1110'), ('1101', '1011', '0001', '0011', '0101'))
+    map_5_2=(('1110', '1010', '0110', '1011', '0110'), ('1000', '0000', '0001', '0010', '0100'), ('1000', '0101', '1110', '1000', '0100'), ('1000', '0011', '0100', '1100', '1100'), ('1001', '0111', '1101', '1001', '0101'))
     map_5=(map_5_1,map_5_2)
     map_6_1=(('1110', '1110', '1011', '0010', '0111', '1110'), ('1100', '1001', '0010', '0101', '1010', '0101'), ('1000', '0010', '0100', '1010', '0000', '0110'), ('1000', '0101', '1000', '0000', '0101', '1100'), ('1100', '1011', '0001', '0100', '1011', '0101'), ('1001', '0011', '0111', '1001', '0011', '0111'))
-    map_6_2=(('1110', '1110', '1011', '0010', '0111', '1110'), ('1100', '1001', '0010', '0101', '1010', '0101'), ('1000', '0010', '0100', '1010', '0000', '0110'), ('1000', '0101', '1000', '0000', '0101', '1100'), ('1100', '1011', '0001', '0100', '1011', '0101'), ('1001', '0011', '0111', '1001', '0011', '0111'))
+    map_6_2=(('1010', '0110', '1010', '0010', '0110', '1110'), ('1000', '0000', '0000', '0001', '0101', '1100'), ('1100', '1000', '0100', '1010', '0011', '0101'), ('1100', '1001', '0000', '0000', '0011', '0110'), ('1000', '0110', '1000', '0000', '0110', '1100'), ('1001', '0101', '1001', '0001', '0101', '1101'))
     map_6=(map_6_1,map_6_2)
     map_7_1=(('1010', '0010', '0111', '1010', '0011', '0110', '1110'), ('1101', '1000', '0010', '0100', '1110', '1101', '1100'), ('1011', '0100', '1001', '0100', '1001', '0010', '0101'), ('1110', '1001', '0110', '1001', '0010', '0101', '1110'), ('1001', '0110', '1000', '0010', '0000', '0011', '0101'), ('1110', '1001', '0000', '0101', '1100', '1011', '0110'), ('1001', '0011', '0101', '1011', '0001', '0011', '0101'))
     map_7_2=(('1010', '0010', '0111', '1010', '0011', '0110', '1110'), ('1101', '1000', '0010', '0100', '1110', '1101', '1100'), ('1011', '0100', '1001', '0100', '1001', '0010', '0101'), ('1110', '1001', '0110', '1001', '0010', '0101', '1110'), ('1001', '0110', '1000', '0010', '0000', '0011', '0101'), ('1110', '1001', '0000', '0101', '1100', '1011', '0110'), ('1001', '0011', '0101', '1011', '0001', '0011', '0101'))
@@ -24,23 +24,79 @@ def generation_liste():
     liste_maps=(map_2,map_3,map_4,map_5,map_6,map_7,map_8)
     return liste_maps
 
-def creation_maps(taille:int):
+def old_creation_maps(taille:int):
     generated_one=((input() for i in range(taille)) for j in range(taille))
     return generated_one
 
+def murs_convert(gauche,droite,haut,bas):
+    murs_locaux=""
+    if gauche:
+        murs_locaux=murs_locaux+'1'
+    else:
+        murs_locaux=murs_locaux+'0'
+    if droite:
+        murs_locaux=murs_locaux+'1'
+    else:
+        murs_locaux=murs_locaux+'0'
+    if haut:
+        murs_locaux=murs_locaux+'1'
+    else:
+        murs_locaux=murs_locaux+'0'
+    if bas:
+        murs_locaux=murs_locaux+'1'
+    else:
+        murs_locaux=murs_locaux+'0'
+    return murs_locaux
+
+def affichage_grille(grille):
+    print("=====================================")
+    for a in grille:
+        print(a)
+    print("=====================================")
+
 def creation_map_intereactive(taille:int):
     assert taille>1, "trop petite carte"
-    grille_murs=[["" for i in range(taille)] for j in range(taille)]
+    grille_murs=[[" " for i in range(taille)] for j in range(taille)]
     for i in range(taille):
         for j in range(taille):
-            gauche,droite,haut,bas=False,False,False,False
+            gauche,droite,haut,bas,commande=False,False,False,False," "
             grille_murs[i][j]="X"
-            print("=====================================")
-            for a in grille_murs:
-                print(a)
-            print("=====================================")
-            commande=input("zqsd pour murs : ")
-            commande=commande.lower()
+            affichage_grille(grille_murs)
+            while commande==" ":
+                commande=input("zqsd pour murs, c pour revenir de 1 : ")
+                commande=commande.lower()
+                for b in commande:
+                    #Cas d'une erreur sur l'entrée précèdente
+                    if b=="c":
+                        commande=" "   
+                        if j-1<0 and i-1<0:
+                            print('Pas possible de revenir en arrière')
+                        else:
+                            grille_murs[i][j]=" "
+                            if j-1<0:
+                                grille_murs[i-1][taille-1]="X"
+                            else:
+                                grille_murs[i][j-1]="X"
+                            affichage_grille(grille_murs)
+                            commande_back=input("Précèdent, zqsd pour murs précèdent : ")
+                            _gauche,_droite,_haut,_bas=False,False,False,False
+                            for n in commande_back:
+                                if n=="z":     
+                                    _haut = not _haut
+                                elif n=="q":
+                                    _gauche = not _gauche
+                                elif n=="s":
+                                    _bas = not _bas
+                                elif n=="d":
+                                    _droite = not _droite
+                                if j-1<0:
+                                    grille_murs[i-1][taille-1]=murs_convert(_gauche,_droite,_haut,_bas)
+                                else:
+                                    grille_murs[i][j-1]=murs_convert(_gauche,_droite,_haut,_bas)
+                            grille_murs[i][j]="X"
+                            affichage_grille(grille_murs)
+                
+            #Traitement de la commande
             for b in commande:
                 if b=="z":     
                     haut = not haut
@@ -52,25 +108,11 @@ def creation_map_intereactive(taille:int):
                     droite = not droite
                 else:
                     print(b+': commande non reconnue')
-            murs_locaux=""
-            if gauche:
-                murs_locaux=murs_locaux+'1'
-            else:
-                murs_locaux=murs_locaux+'0'
-            if droite:
-                murs_locaux=murs_locaux+'1'
-            else:
-                murs_locaux=murs_locaux+'0'
-            if haut:
-                murs_locaux=murs_locaux+'1'
-            else:
-                murs_locaux=murs_locaux+'0'
-            if bas:
-                murs_locaux=murs_locaux+'1'
-            else:
-                murs_locaux=murs_locaux+'0'
-            grille_murs[i][j]=murs_locaux
+            grille_murs[i][j]=murs_convert(gauche,droite,haut,bas)
+
+    #Transformation en tuple
     for i in range(taille):
         grille_murs[i]=tuple(grille_murs[i]) # type: ignore
     grille_murs=tuple(grille_murs)
+
     return grille_murs
