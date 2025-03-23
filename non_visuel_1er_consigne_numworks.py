@@ -47,7 +47,7 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
     assert type(commande) == str, "L'input n'est pas un string"
     
     for j in range(len(commande)):
-        if commande[j]=="d" or commande[j]=="droite":
+        if commande[j]=="d" or commande[j]=="droite" or commande[j]=="6":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][1]=="0":
                 grille_joueur[pos_joueur[1]][pos_joueur[0]]=" "
                 pos_joueur[0]+=1
@@ -57,7 +57,7 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
             else:
                 print("C'est un MUR CHEHHHHH !!!!!!!!!!")
                 nbr_murs+=1
-        elif commande[j]=="g" or commande[j]=="gauche" or commande[j]=="q":
+        elif commande[j]=="g" or commande[j]=="gauche" or commande[j]=="q" or commande[j]=="4":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][0]=="0":
                 grille_joueur[pos_joueur[1]][pos_joueur[0]]=" "
                 pos_joueur[0]-=1
@@ -67,7 +67,7 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
             else:
                 print("C'est un MUR CHEHHHHH !!!!!!!!!!")
                 nbr_murs+=1
-        elif commande[j]=="h" or commande[j]=="haut" or commande[j]=="z":
+        elif commande[j]=="h" or commande[j]=="haut" or commande[j]=="z" or commande[j]=="8":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][2]=="0":
                 grille_joueur[pos_joueur[1]][pos_joueur[0]]=" "
                 pos_joueur[1]-=1
@@ -77,7 +77,7 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
             else:
                 print("C'est un MUR CHEHHHHH !!!!!!!!!!")
                 nbr_murs+=1
-        elif commande[j]=="b" or commande[j]=="bas" or commande[j]=="s":
+        elif commande[j]=="b" or commande[j]=="bas" or commande[j]=="s" or commande[j]=="2":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][3]=="0":
                 grille_joueur[pos_joueur[1]][pos_joueur[0]]=" "
                 pos_joueur[1]+=1
