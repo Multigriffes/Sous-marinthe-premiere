@@ -30,3 +30,46 @@ def generation_liste():
 def creation_maps(taille:int):
     generated_one=((input() for i in range(taille)) for j in range(taille))
     return generated_one
+
+def creation_map_intereactive(taille:int):
+    grille_murs=[["" for i in range(taille)] for j in range(taille)]
+    for i in range(taille):
+        for j in range(taille):
+            gauche,droite,haut,bas=False,False,False,False
+            grille_murs[i][j]="X"
+            print("=====================================")
+            for a in grille_murs:
+                print(a)
+            print("=====================================")
+            commande=input("zqsd pour murs : ")
+            commande=commande.lower()
+            for b in commande:
+                if b=="z":     
+                    haut = not haut
+                elif b=="q":
+                    gauche = not gauche
+                elif b=="s":
+                    bas = not bas
+                elif b=="d":
+                    droite = not droite
+                else:
+                    print(b+': commande non reconnue')
+            murs_locaux=""
+            if gauche:
+                murs_locaux=murs_locaux+'1'
+            else:
+                murs_locaux=murs_locaux+'0'
+            if droite:
+                murs_locaux=murs_locaux+'1'
+            else:
+                murs_locaux=murs_locaux+'0'
+            if haut:
+                murs_locaux=murs_locaux+'1'
+            else:
+                murs_locaux=murs_locaux+'0'
+            if bas:
+                murs_locaux=murs_locaux+'1'
+            else:
+                murs_locaux=murs_locaux+'0'
+            grille_murs[i][j]=murs_locaux
+    print(grille_murs)
