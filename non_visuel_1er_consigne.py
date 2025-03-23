@@ -104,8 +104,8 @@ def play():
     while isPlay:
         #Affichage
         print("=====================================")
-        for i in range(taille_grille):
-            print(grille_joueur[i])
+        for i in grille_joueur:
+            print(i)
         print("Nombres d'étoiles obtenues : ", nbr_etoiles)
         print("Nombres de murs touchés : ", nbr_murs)
         print("=====================================")
