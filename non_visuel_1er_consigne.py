@@ -88,7 +88,7 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
                 print("C'est un MUR CHEHHHHH !!!!!!!!!!")
                 nbr_murs+=1
         else:
-            print("La commande n'est pas reconnu")
+            print(j+": La commande n'est pas reconnu")
     return [grille_joueur,pos_joueur,nbr_etoiles,nbr_murs]
     
 def play():
