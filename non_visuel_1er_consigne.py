@@ -97,7 +97,12 @@ def play():
     nbr_etoiles,nbr_murs,isPlay,taille_grille=0,0,True,""
     while taille_grille=="":
         taille_grille=input("Taille de la grille souhaitée : ")
-    taille_grille=int(taille_grille)
+        try:
+            int(taille_grille)
+        except:
+            taille_grille=""
+        else:
+            taille_grille=int(taille_grille)
     pos_joueur=list(input("Position du joueur initiale si souhaité sinon laisser vide : "))
     info_init=creation_grille_joueur(taille_grille,pos_joueur)
     grille_joueur,grille_murs,pos_joueur=info_init[0],info_init[1],info_init[2]
