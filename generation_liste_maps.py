@@ -63,8 +63,7 @@ def creation_map_intereactive(taille:int):
             grille_murs[i][j]="X"
             affichage_grille(grille_murs)
             while commande==" ":
-                commande=input("zqsd pour murs, c pour revenir de 1 : ")
-                commande=commande.lower()
+                commande=input("zqsd pour murs, c pour revenir de 1 : ").lower()
                 for b in commande:
                     #Cas d'une erreur sur l'entrée précèdente
                     if b=="c":
@@ -78,7 +77,7 @@ def creation_map_intereactive(taille:int):
                             else:
                                 grille_murs[i][j-1]="X"
                             affichage_grille(grille_murs)
-                            commande_back=input("Précèdent, zqsd pour murs précèdent : ")
+                            commande_back=input("Précèdent, zqsd pour murs précèdent : ").lower()
                             _gauche,_droite,_haut,_bas=False,False,False,False
                             for n in commande_back:
                                 if n=="z":     
