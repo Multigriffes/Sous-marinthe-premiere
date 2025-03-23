@@ -25,13 +25,14 @@ def generation_liste():
     map_8=(map_8_1,map_8_2)
 
     liste_maps=(map_1,map_2,map_3,map_4,map_5,map_6,map_7,map_8)
-    print(liste_maps)
+    return liste_maps
 
 def creation_maps(taille:int):
     generated_one=((input() for i in range(taille)) for j in range(taille))
     return generated_one
 
 def creation_map_intereactive(taille:int):
+    assert taille>1, "trop petite carte"
     grille_murs=[["" for i in range(taille)] for j in range(taille)]
     for i in range(taille):
         for j in range(taille):
@@ -72,4 +73,7 @@ def creation_map_intereactive(taille:int):
             else:
                 murs_locaux=murs_locaux+'0'
             grille_murs[i][j]=murs_locaux
-    print(grille_murs)
+    for i in range(taille):
+        grille_murs[i]=tuple(grille_murs[i]) # type: ignore
+    grille_murs=tuple(grille_murs)
+    return grille_murs
