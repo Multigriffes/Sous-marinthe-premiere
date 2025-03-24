@@ -24,9 +24,9 @@ def generation_liste():
     liste_maps=(map_2,map_3,map_4,map_5,map_6,map_7,map_8)
     return liste_maps
 
-def old_creation_maps(taille:int):
-    generated_one=((input() for i in range(taille)) for j in range(taille))
-    return generated_one
+#def old_creation_maps(taille:int):
+#    generated_one=((input() for i in range(taille)) for j in range(taille))
+#    return generated_one
 
 def murs_convert(gauche,droite,haut,bas):
     murs_locaux=""
