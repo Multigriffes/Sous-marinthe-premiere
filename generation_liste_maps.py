@@ -15,7 +15,7 @@ def generation_liste():
     map_6_2=(('1010', '0110', '1010', '0010', '0110', '1110'), ('1000', '0000', '0000', '0001', '0101', '1100'), ('1100', '1000', '0100', '1010', '0011', '0101'), ('1100', '1001', '0000', '0000', '0011', '0110'), ('1000', '0110', '1000', '0000', '0110', '1100'), ('1001', '0101', '1001', '0001', '0101', '1101'))
     map_6=(map_6_1,map_6_2)
     map_7_1=(('1010', '0010', '0111', '1010', '0011', '0110', '1110'), ('1101', '1000', '0010', '0100', '1110', '1101', '1100'), ('1011', '0100', '1001', '0100', '1001', '0010', '0101'), ('1110', '1001', '0110', '1001', '0010', '0101', '1110'), ('1001', '0110', '1000', '0010', '0000', '0011', '0101'), ('1110', '1001', '0000', '0101', '1100', '1011', '0110'), ('1001', '0011', '0101', '1011', '0001', '0011', '0101'))
-    map_7_2=(('1010', '0010', '0111', '1010', '0011', '0110', '1110'), ('1101', '1000', '0010', '0100', '1110', '1101', '1100'), ('1011', '0100', '1001', '0100', '1001', '0010', '0101'), ('1110', '1001', '0110', '1001', '0010', '0101', '1110'), ('1001', '0110', '1000', '0010', '0000', '0011', '0101'), ('1110', '1001', '0000', '0101', '1100', '1011', '0110'), ('1001', '0011', '0101', '1011', '0001', '0011', '0101'))
+    map_7_2=(('1110', '1010', '0010', '0010', '0011', '0010', '0111'), ('1100', '1000', '0000', '0100', '1010', '0000', '0110'), ('1100', '1001', '0100', '1000', '0000', '0001', '0100'), ('1000', '0110', '1100', '1000', '0000', '0110', '1100'), ('1000', '0100', '1000', '0000', '0001', '0100', '1100'), ('1000', '0000', '0000', '0100', '1010', '0000', '0101'), ('1101', '1001', '0001', '0001', '0001', '0001', '0111'))
     map_7=(map_7_1,map_7_2)
     map_8_1=(('1010', '0010', '0010', '0111', '1010', '0010', '0010', '0110'), ('1001', '0000', '0001', '0010', '0000', '0100', '1001', '0100'), ('1110', '1000', '0010', '0000', '0001', '0001', '0010', '0100'), ('1100', '1001', '0100', '1101', '1011', '0110', '1000', '0100'), ('1000', '0010', '0000', '0111', '1110', '1100', '1000', '0100'), ('1001', '0000', '0001', '0010', '0001', '0100', '1000', '0100'), ('1010', '0100', '1110', '1000', '0010', '0101', '1000', '0100'), ('1001', '0101', '1001', '0001', '0101', '1011', '0001', '0101'))
     map_8_2=(('1010', '0010', '0010', '0111', '1010', '0010', '0010', '0110'), ('1001', '0000', '0001', '0010', '0000', '0100', '1001', '0100'), ('1110', '1000', '0010', '0000', '0001', '0001', '0010', '0100'), ('1100', '1001', '0100', '1101', '1011', '0110', '1000', '0100'), ('1000', '0010', '0000', '0111', '1110', '1100', '1000', '0100'), ('1001', '0000', '0001', '0010', '0001', '0100', '1000', '0100'), ('1010', '0100', '1110', '1000', '0010', '0101', '1000', '0100'), ('1001', '0101', '1001', '0001', '0101', '1011', '0001', '0101'))
@@ -54,6 +54,32 @@ def affichage_grille(grille):
         print(a)
     print("=====================================")
 
+def murs_cotes(taille,grille_murs):
+    for i in range(taille):
+        grille_murs[0][i]=grille_murs[0][i][0]+grille_murs[0][i][1]+"1"+grille_murs[0][i][3]
+        grille_murs[taille-1][i]=grille_murs[taille-1][i][0]+grille_murs[taille-1][i][1]+grille_murs[taille-1][i][2]+"1"
+        grille_murs[i][0]="1"+grille_murs[i][0][1]+grille_murs[i][0][2]+grille_murs[i][0][3]
+        grille_murs[i][taille-1]=grille_murs[i][taille-1][0]+"1"+grille_murs[i][taille-1][2]+grille_murs[i][taille-1][3]
+    return grille_murs
+
+def murs_communs(taille,grille_murs):
+    for i in range(taille):
+        for j in range(taille):
+            if i>0:
+                if grille_murs[i][j][2]=="1":
+                    grille_murs[i-1][j]=grille_murs[i-1][j][0]+grille_murs[i-1][j][1]+grille_murs[i-1][j][2]+"1"
+            if i<taille-1:
+                if grille_murs[i][j][3]=="1":
+                    grille_murs[i+1][j]=grille_murs[i+1][j][0]+grille_murs[i+1][j][1]+"1"+grille_murs[i+1][j][3]
+            if j>0:
+                if grille_murs[i][j][0]=="1":
+                    grille_murs[i][j-1]=grille_murs[i][j-1][0]+"1"+grille_murs[i][j-1][2]+grille_murs[i][j-1][3]
+            if j<taille-1:
+                if grille_murs[i][j][1]=="1":
+                    grille_murs[i][j+1]="1"+grille_murs[i][j+1][1]+grille_murs[i][j+1][2]+grille_murs[i][j+1][3]
+    return grille_murs
+            
+
 def creation_map_intereactive(taille:int):
     assert taille>1, "trop petite carte"
     grille_murs=[[" " for i in range(taille)] for j in range(taille)]
@@ -64,36 +90,39 @@ def creation_map_intereactive(taille:int):
             affichage_grille(grille_murs)
             while commande==" ":
                 commande=input("zqsd pour murs, c pour revenir de 1 : ").lower()
+
+                #Cas d'une erreur sur l'entrée précèdente
                 for b in commande:
-                    #Cas d'une erreur sur l'entrée précèdente
                     if b=="c":
-                        commande=" "   
-                        if j-1<0 and i-1<0:
-                            print('Pas possible de revenir en arrière')
+                        commande="c"
+                if commande=="c":
+                    commande=" "   
+                    if j-1<0 and i-1<0:
+                        print('Pas possible de revenir en arrière')
+                    else:
+                        grille_murs[i][j]=" "
+                        if j-1<0:
+                            grille_murs[i-1][taille-1]="X"
                         else:
-                            grille_murs[i][j]=" "
-                            if j-1<0:
-                                grille_murs[i-1][taille-1]="X"
-                            else:
-                                grille_murs[i][j-1]="X"
-                            affichage_grille(grille_murs)
-                            commande_back=input("Précèdent, zqsd pour murs précèdent : ").lower()
-                            _gauche,_droite,_haut,_bas=False,False,False,False
-                            for n in commande_back:
-                                if n=="z":     
-                                    _haut = not _haut
-                                elif n=="q":
-                                    _gauche = not _gauche
-                                elif n=="s":
-                                    _bas = not _bas
-                                elif n=="d":
-                                    _droite = not _droite
-                                if j-1<0:
-                                    grille_murs[i-1][taille-1]=murs_convert(_gauche,_droite,_haut,_bas)
-                                else:
-                                    grille_murs[i][j-1]=murs_convert(_gauche,_droite,_haut,_bas)
-                            grille_murs[i][j]="X"
-                            affichage_grille(grille_murs)
+                            grille_murs[i][j-1]="X"
+                        affichage_grille(grille_murs)
+                        commande_back=input("zqsd pour murs précèdent : ").lower()
+                        _gauche,_droite,_haut,_bas=False,False,False,False
+                        for n in commande_back:
+                            if n=="z":     
+                                _haut = not _haut
+                            elif n=="q":
+                                _gauche = not _gauche
+                            elif n=="s":
+                                _bas = not _bas
+                            elif n=="d":
+                                _droite = not _droite
+                        if j-1<0:
+                            grille_murs[i-1][taille-1]=murs_convert(_gauche,_droite,_haut,_bas)
+                        else:
+                            grille_murs[i][j-1]=murs_convert(_gauche,_droite,_haut,_bas)
+                        grille_murs[i][j]="X"
+                        affichage_grille(grille_murs)
                 
             #Traitement de la commande
             for b in commande:
@@ -109,9 +138,15 @@ def creation_map_intereactive(taille:int):
                     print(b+': commande non reconnue')
             grille_murs[i][j]=murs_convert(gauche,droite,haut,bas)
 
+    #Mise en place des murs obligatoires ou déduis
+    grille_murs=murs_cotes(taille,grille_murs)
+    grille_murs=murs_communs(taille,grille_murs)
+    
     #Transformation en tuple
     for i in range(taille):
         grille_murs[i]=tuple(grille_murs[i]) # type: ignore
     grille_murs=tuple(grille_murs)
+    
+    affichage_grille(grille_murs)
 
     return grille_murs
