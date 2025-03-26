@@ -132,5 +132,3 @@ def play():
             print("Bien joué, tu as touché",nbr_murs,"murs et attrapé",nbr_etoiles,"étoiles. GG ou pas")
             isPlay=False
         
-
-play()
