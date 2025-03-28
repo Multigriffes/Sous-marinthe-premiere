@@ -6,7 +6,7 @@ liste_map=(((('1011', '0110'), ('1011', '0101')), (('1010', '0111'), ('1001', '0
 def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
     """
     Cette fonction créé la liste représentant la grille et représente le joueur dessus à l'aide 
-    d'un "0" et les cases vides avec un "*"
+    d'un "O" et les cases vides avec un "*"
     """
     
     assert type(taille_grille)==int ;"la taille de la grille n'est pas un int"
@@ -96,6 +96,7 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
 def play():
     #Initialisation avec input joueur
     nbr_etoiles,nbr_murs,isPlay,taille_grille=0,0,True,""
+
     while taille_grille=="":
         taille_grille=input("Taille de la grille souhaitée : ")
         try:
@@ -106,6 +107,7 @@ def play():
             taille_grille=int(taille_grille)
             if taille_grille>15:
                 taille_grille=""
+
     pos_joueur=list(input("Position du joueur initiale si souhaité sinon laisser vide : "))
     info_init=creation_grille_joueur(taille_grille,pos_joueur)
     grille_joueur,grille_murs,pos_joueur=info_init[0],info_init[1],info_init[2]
