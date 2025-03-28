@@ -6,7 +6,7 @@ liste_map=(((('1011', '0110'), ('1011', '0101')), (('1010', '0111'), ('1001', '0
 def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
     """
     Cette fonction créé la liste représentant la grille et représente le joueur dessus à l'aide 
-    d'un "0" et les cases vides avec un "*"
+    d'un "0" et les cases vides avec un "*" et la sorite avec un "S"
     """
     
     assert type(taille_grille)==int ;"la taille de la grille n'est pas un int"
@@ -31,15 +31,20 @@ def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
     else :
         assert pos_joueur[0] <= taille_grille-1 or pos_joueur[1] <= taille_grille-1, "Position hors du terrain"
         assert len(pos_joueur) == 2 , "Y a 2 nombres pour une coordonnées en 2D idiots"
+    
+    #Génération des coordonnée de la sortie
+    pos_sortie=[randint(0,taille_grille-1),randint(0,taille_grille-1)]
 
     #Creation de la grille du joueur
     grille_joueur = [["*" for i in range(taille_grille)] for b in range(taille_grille)]
     grille_joueur[pos_joueur[1]][pos_joueur[0]] = "O"
+    grille_joueur[pos_sortie[1]][pos_sortie[0]] = "S"
+
 
     #Choix de le map en fonction du nbr de cases
     grille_murs = liste_map[taille_grille-2][randint(0,len(liste_map[taille_grille-2])-1)]
 
-    return [grille_joueur,grille_murs,pos_joueur]
+    return [grille_joueur,grille_murs,pos_joueur,pos_sortie]
 
 def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_etoiles:int,nbr_murs:int):
     """
@@ -108,7 +113,7 @@ def play():
                 taille_grille=""
     pos_joueur=list(input("Position du joueur initiale si souhaité sinon laisser vide : "))
     info_init=creation_grille_joueur(taille_grille,pos_joueur)
-    grille_joueur,grille_murs,pos_joueur=info_init[0],info_init[1],info_init[2]
+    grille_joueur,grille_murs,pos_joueur,pos_sortie=info_init[0],info_init[1],info_init[2],info_init[3]
 
     while isPlay:
         #Affichage
