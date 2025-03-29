@@ -100,8 +100,9 @@ def affichage(grille_joueur,nbr_murs):
     print("=====================================")
     for i in grille_joueur:
         print(i)
-    print("Nombres de murs touchés : ", nbr_murs)
+    print("Nombres de murs touchés :", nbr_murs)
     print("=====================================")
+
 def play():
     #Initialisation avec input joueur
     nbr_murs,isPlay,taille_grille,pos_joueur=0,True,"",['default']

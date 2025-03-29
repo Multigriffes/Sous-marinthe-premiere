@@ -95,8 +95,8 @@ def affichage(grille_joueur,nbr_etoiles,nbr_murs):
     print("=====================================")
     for i in grille_joueur:
         print(i)
-    print("Nombres d'étoiles obtenues : ", nbr_etoiles)
-    print("Nombres de murs touchés : ", nbr_murs)
+    print("Nombres d'étoiles obtenues :", nbr_etoiles)
+    print("Nombres de murs touchés :", nbr_murs)
     print("=====================================")
 
 def play():
