@@ -47,8 +47,8 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
     assert type(nbr_etoiles) == int, "nbr_etoiles n'est pas un int"
     assert type(nbr_murs) == int, "nbr_murs n'est pas un int"
     
-    grille_joueur[pos_joueur[1]][pos_joueur[0]]=" "
     for j in commande:
+        grille_joueur[pos_joueur[1]][pos_joueur[0]]=" "
         if j=="d":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][1]=="0":
                 pos_joueur[0]+=1
