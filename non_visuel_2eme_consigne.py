@@ -48,7 +48,7 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,pos_
     La fonction gère les action du joueur et sont influence sur les diffèrentes variables du jeu
     """
 
-    assert type(commande) == str, "La commande n'est pas un string"
+    assert type(commande) == str, "commande n'est pas un string"
     assert type(grille_joueur) == list, "grille_joueur n'est pas un list"
     assert type(grille_murs) == tuple, "grille_murs n'est pas un tuple"
     assert type(pos_joueur) == list, "pos_joueur n'est pas un list"
@@ -117,7 +117,7 @@ def play():
             taille_grille=int(taille_grille)
             if taille_grille>15:
                 taille_grille=""
-    
+
     while pos_joueur==['default']:
         pos_joueur=list(input("Position du joueur initiale si souhaité sinon laisser vide : "))
         #Nettoyage de la liste de string de la position
