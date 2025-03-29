@@ -123,10 +123,32 @@ def play():
                 try:
                     int(pos_joueur[a])
                 except:
-                    del pos_joueur[a]
+                    if pos_joueur[a]==',':
+                        a+=1
+                    else:
+                        del pos_joueur[a]
                 else:
-                    pos_joueur[a]=int(pos_joueur[a]) # type: ignore
                     a+=1
+            pos_joueur_temp,isVirgule,a=[],False,0
+            for i in pos_joueur:
+                if i==',':
+                    isVirgule=True
+                else:
+                    try:
+                        pos_joueur_temp[a-1]
+                    except:
+                        pos_joueur_temp.append(i)
+                        a+=1
+                    else:
+                        if isVirgule:
+                            pos_joueur_temp.append(i)
+                            a+=1
+                        else:
+                            pos_joueur_temp[a-1]=pos_joueur_temp[a-1][0:len(pos_joueur_temp[a-1])]+i
+                    isVirgule=False
+            for i in range(len(pos_joueur_temp)):
+                pos_joueur_temp[i]=int(pos_joueur_temp[i])
+            pos_joueur=pos_joueur_temp.copy()
 
     info_init=creation_grille_joueur(taille_grille,pos_joueur)
     grille_joueur,grille_murs,pos_joueur=info_init[0],info_init[1],info_init[2]
