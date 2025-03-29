@@ -302,7 +302,7 @@ return [grille_joueur,pos_joueur,nbr_etoiles,nbr_murs]
 return [grille_joueur,pos_joueur,nbr_murs]
 ```
 
-## Affichage() :
+## affichage() :
 
 La fonction va prendre comme variable :
 
@@ -325,5 +325,6 @@ print("=====================================")
 
 Le tout est englobé dans des `print("=====================================")` pour améliorer la lisibilitée
 
-## Play() :
+## play() :
+
 
