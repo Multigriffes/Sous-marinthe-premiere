@@ -451,7 +451,7 @@ info_init=creation_grille_joueur(taille_grille,pos_joueur)
 grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie=info_init[0],info_init[1],info_init[2],info_init[3],info_init[4]
 ```
 
-### Boucle de jeu ENFINNNN !!! :
+### Boucle de jeu ENFINNN !!! :
 
 ```python
 while isPlay:
