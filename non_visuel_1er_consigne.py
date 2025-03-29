@@ -87,6 +87,11 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
     return [grille_joueur,pos_joueur,nbr_etoiles,nbr_murs]
 
 def affichage(grille_joueur,nbr_etoiles,nbr_murs):
+
+    assert type(grille_joueur)==list, "grille_joueur n'est pas une liste"
+    assert type(nbr_etoiles)==int, "nbr_etoiles n'est pas un int"
+    assert type(nbr_murs)==int, "nbr_murs n'est pas un int"
+
     print("=====================================")
     for i in grille_joueur:
         print(i)
