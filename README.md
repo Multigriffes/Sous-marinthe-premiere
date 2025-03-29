@@ -16,7 +16,7 @@ Cela afin que l'affichage dans la console et la compréhension soit simplifié.
 Toutes les cartes sont enregistrées dans une grande liste `liste_maps` qui stocke toutes les cartes d'une taille `x` à l'indice `x-2`.  
 Les murs présent dans une case `[X,Y]` sont enregistrés sous forme d'une string `"0000"` qui correspond à `"gauche,droite,haut,bas"` avec 1 pour un mur.
 
-Le joueur évolue dans une grille carré où il est représenté par un 'O' et potentiellement la sortie par un 'S'. Des murs sont présents comme un labyrinthe mais ils ne sont pas montré au joueur, il doit les deviner au fur et à mesure de la partie.
+Le joueur évolue dans une grille carré où il est représenté par un 'O' et éventuellement la sortie par un 'S'. Des murs sont présents comme un labyrinthe mais ils ne sont pas montré au joueur, il doit les deviner au fur et à mesure de la partie.
 
 ```text
 ['*', '*', '*', '*', '*']
