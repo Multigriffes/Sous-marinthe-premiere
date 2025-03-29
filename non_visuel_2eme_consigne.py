@@ -43,7 +43,7 @@ def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
 
     return [grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie]
 
-def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,pos_joueur_init:list,pos_sortie:list,nbr_murs:int,win:bool):
+def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,pos_joueur_init:list,pos_sortie:list,nbr_murs:int):
     """
     La fonction gère les action du joueur et sont influence sur les diffèrentes variables du jeu
     """
@@ -55,15 +55,12 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,pos_
     assert type(pos_joueur_init) == list, "pos_joueur_init n'est pas un list"
     assert type(pos_sortie) == list, "pos_sortie n'est pas un list"
     assert type(nbr_murs) == int, "nbr_murs n'est pas un int"
-    assert type(win) == bool, "win n'est pas un bool"
     
     for j in commande:
         if j=="d" or j=="droite":
             grille_joueur[pos_joueur[1]][pos_joueur[0]]="*"
             if grille_murs[pos_joueur[1]][pos_joueur[0]][1]=="0":
                 pos_joueur[0]+=1
-                if pos_joueur==pos_sortie:
-                    win= not win
             else:
                 print("C'est un MUR CHEHHHHH !!!!!!!!!!")
                 nbr_murs+=1
@@ -73,8 +70,6 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,pos_
             grille_joueur[pos_joueur[1]][pos_joueur[0]]="*"
             if grille_murs[pos_joueur[1]][pos_joueur[0]][0]=="0":
                 pos_joueur[0]-=1
-                if pos_joueur==pos_sortie:
-                    win= not win
             else:
                 print("C'est un MUR CHEHHHHH !!!!!!!!!!")
                 nbr_murs+=1
@@ -84,8 +79,6 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,pos_
             grille_joueur[pos_joueur[1]][pos_joueur[0]]="*"
             if grille_murs[pos_joueur[1]][pos_joueur[0]][2]=="0":
                 pos_joueur[1]-=1
-                if pos_joueur==pos_sortie:
-                    win= not win
             else:
                 print("C'est un MUR CHEHHHHH !!!!!!!!!!")
                 nbr_murs+=1
@@ -95,8 +88,6 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,pos_
             grille_joueur[pos_joueur[1]][pos_joueur[0]]="*"
             if grille_murs[pos_joueur[1]][pos_joueur[0]][3]=="0":
                 pos_joueur[1]+=1
-                if pos_joueur==pos_sortie:
-                    win= not win
             else:
                 print("C'est un MUR CHEHHHHH !!!!!!!!!!")
                 nbr_murs+=1
@@ -104,7 +95,8 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,pos_
             grille_joueur[pos_joueur[1]][pos_joueur[0]]="O"
         else:
             print(j+" : La commande n'est pas reconnu")
-    return [grille_joueur,pos_joueur,nbr_murs,win]
+    grille_joueur[pos_sortie[1]][pos_sortie[0]]="S"
+    return [grille_joueur,pos_joueur,nbr_murs]
     
 def affichage(grille_joueur,nbr_murs):
     print("=====================================")
@@ -114,7 +106,7 @@ def affichage(grille_joueur,nbr_murs):
     print("=====================================")
 def play():
     #Initialisation avec input joueur
-    nbr_murs,isPlay,taille_grille,pos_joueur,win=0,True,"",['default'],False
+    nbr_murs,isPlay,taille_grille,pos_joueur=0,True,"",['default']
     
     while taille_grille=="":
         taille_grille=input("Taille de la grille souhaitée : ")
@@ -156,10 +148,10 @@ def play():
         if commande=="exit":
             isPlay=False
 
-        info_mouv=action(commande,grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie,nbr_murs,win)
-        grille_joueur,pos_joueur,nbr_murs,win=info_mouv[0],info_mouv[1],info_mouv[2],info_mouv[3]
+        info_mouv=action(commande,grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie,nbr_murs)
+        grille_joueur,pos_joueur,nbr_murs=info_mouv[0],info_mouv[1],info_mouv[2]
 
-        if win:
+        if pos_joueur==pos_sortie:
             print("Bien joué, tu as recommencé",nbr_murs,"fois avant de gagner. GG ou pas")
             isPlay=False
         
