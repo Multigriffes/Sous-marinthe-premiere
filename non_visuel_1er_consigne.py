@@ -142,9 +142,9 @@ def play():
         
         if commande=="exit":
             isPlay=False
-
-        info_mouv=action(commande,grille_joueur,grille_murs,pos_joueur,nbr_etoiles,nbr_murs)
-        grille_joueur,pos_joueur,nbr_etoiles,nbr_murs=info_mouv[0],info_mouv[1],info_mouv[2],info_mouv[3]
+        else:
+            info_mouv=action(commande,grille_joueur,grille_murs,pos_joueur,nbr_etoiles,nbr_murs)
+            grille_joueur,pos_joueur,nbr_etoiles,nbr_murs=info_mouv[0],info_mouv[1],info_mouv[2],info_mouv[3]
 
         if nbr_etoiles==taille_grille**2-1:
             print("Bien joué, tu as touché",nbr_murs,"murs et attrapé",nbr_etoiles,"étoiles. GG ou pas")

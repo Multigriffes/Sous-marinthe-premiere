@@ -146,9 +146,9 @@ def play():
         
         if commande=="exit":
             isPlay=False
-
-        info_mouv=action(commande,grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie,nbr_murs)
-        grille_joueur,pos_joueur,nbr_murs=info_mouv[0],info_mouv[1],info_mouv[2]
+        else:
+            info_mouv=action(commande,grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie,nbr_murs)
+            grille_joueur,pos_joueur,nbr_murs=info_mouv[0],info_mouv[1],info_mouv[2]
 
         if pos_joueur==pos_sortie:
             print("Bien joué, tu as recommencé",nbr_murs,"fois avant de gagner. GG ou pas")
