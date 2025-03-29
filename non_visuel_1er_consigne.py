@@ -20,7 +20,7 @@ def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
         if pos_joueur[0] > taille_grille-1 or pos_joueur[1] > taille_grille-1:
             print("Position hors du terrain, génération aléatoire...")
             pos_joueur=[]
-        if len(pos_joueur)!=2:
+        if len(pos_joueur)!=2 and len(pos_joueur)!=0:
             print("Y a 2 nombres pour une coordonnées en 2D idiots, génération aléatoire...")
             pos_joueur=[]
     if pos_joueur == [] :
