@@ -83,7 +83,7 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
                 nbr_murs+=1
         else:
             print(j+" : La commande n'est pas reconnu")
-    grille_joueur[pos_joueur[1]][pos_joueur[0]]="O"   
+    grille_joueur[pos_joueur[1]][pos_joueur[0]]="O"
     return [grille_joueur,pos_joueur,nbr_etoiles,nbr_murs]
 
 def affichage(grille_joueur,nbr_etoiles,nbr_murs):
