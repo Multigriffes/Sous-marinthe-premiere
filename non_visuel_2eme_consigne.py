@@ -56,33 +56,30 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,pos_
     assert type(pos_sortie) == list, "pos_sortie n'est pas un list"
     assert type(nbr_murs) == int, "nbr_murs n'est pas un int"
     
+    grille_joueur[pos_joueur[1]][pos_joueur[0]]="*"
     for j in commande:
-        if j=="d" or j=="droite":
-            grille_joueur[pos_joueur[1]][pos_joueur[0]]="*"
+        if j=="d":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][1]=="0":
                 pos_joueur[0]+=1
             else:
                 print("C'est un MUR CHEHHHHH !!!!!!!!!!")
                 nbr_murs+=1
                 pos_joueur=pos_joueur_init.copy()
-        elif j=="g" or j=="gauche" or j=="q":
-            grille_joueur[pos_joueur[1]][pos_joueur[0]]="*"
+        elif j=="g" or j=="q":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][0]=="0":
                 pos_joueur[0]-=1
             else:
                 print("C'est un MUR CHEHHHHH !!!!!!!!!!")
                 nbr_murs+=1
                 pos_joueur=pos_joueur_init.copy()
-        elif j=="h" or j=="haut" or j=="z":
-            grille_joueur[pos_joueur[1]][pos_joueur[0]]="*"
+        elif j=="h" or j=="z":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][2]=="0":
                 pos_joueur[1]-=1
             else:
                 print("C'est un MUR CHEHHHHH !!!!!!!!!!")
                 nbr_murs+=1
                 pos_joueur=pos_joueur_init.copy()
-        elif j=="b" or j=="bas" or j=="s":
-            grille_joueur[pos_joueur[1]][pos_joueur[0]]="*"
+        elif j=="b" or j=="s":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][3]=="0":
                 pos_joueur[1]+=1
             else:
