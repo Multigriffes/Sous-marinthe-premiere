@@ -1,6 +1,8 @@
-# Sous-marinthe-premiere le jeu
+# Sous-marinthe-premiere le jeu :
 
-*Projet de fin d'année de NSI de première*  
+*Projet de fin d'année de NSI de première*
+
+> [!IMPORTANT]
 ***Les consignes ayant changée, deux fichier sont présent afin de pouvoir jouer aux deux jeux différents.  
 La doc devrait expliquer de manière clair quand des différences sont présentes***
 
@@ -124,11 +126,12 @@ Tout le formatage des entrées utilisateur est traité dans la fonction `play()`
 
 ## creation_grille_joueur() :
 
-La fonction va prendre comme variable :
+**La fonction va prendre comme variable :**
 
 - `taille_grille`, la taille de la grille entrée par le joueur formaté
 - `pos_joueur`, la position du joueur entrée par le joueur formaté
 
+---
 **Premièrement,** la fonction va vérifier la cohérence des coordonnées données en entrée, le cas contraire en générer des nouvelles aléatoirement :
 
 ```python
@@ -195,7 +198,7 @@ return [grille_joueur,grille_murs,pos_joueur,pos_joueur_init_pos_sortie]
 
 ## action() :
 
-La fonction va prendre comme variable :
+**La fonction va prendre comme variable :**
 
 - `commande`, l'input du joueur formaté
 - `grille_joueur`, la grille de positionnement visuel actuelle
@@ -208,6 +211,7 @@ La fonction va prendre comme variable :
   - `pos_joueur_init`, la position du joueur de départ
   - `pos_sortie`, la position de la sortie
 
+---
 Tout les types sont vérifiés puis on initialise le traitement des commandes du joueur avec un boucle "`for j in commande:`" afin de traiter la possibilité de plusieurs déplacement/action à la suite.  
 `j` représante un seule caractère de la string `commande`.
 
@@ -290,13 +294,13 @@ grille_joueur[pos_sortie[1]][pos_sortie[0]]="S"
 
 **Enfin,** on retourne toutes les variables modifiées/crées pour pouvoir les utiliser en dehors de cette fonction :
 
-1<sup>ère</sup> consigne :
+- 1<sup>ère</sup> consigne :
 
 ```python
 return [grille_joueur,pos_joueur,nbr_etoiles,nbr_murs]
 ```
 
-2<sup>ème</sup> consigne :
+- 2<sup>ème</sup> consigne :
 
 ```python
 return [grille_joueur,pos_joueur,nbr_murs]
@@ -304,15 +308,16 @@ return [grille_joueur,pos_joueur,nbr_murs]
 
 ## affichage() :
 
-La fonction va prendre comme variable :
+**La fonction va prendre comme variable :**
 
 - `grille_joueur`, la grille de positionnement visuel actuelle
 - `nbr_murs`, le nombre de murs précèdement touchés
 - 1<sup>ère</sup> consigne :
   - `nbr_etoiles`, le nombre d'étoiles précèdement touchées
 
+---
 Tout les types sont vérifiés.  
-On fait une boucle qui affiche ligne après ligne la `grille_joueur` puis on print les information en fonctionde la consigne :
+On fait une boucle qui affiche ligne après ligne `grille_joueur` puis on `print` les information en fonction de la consigne :
 
 ```python
 print("=====================================")
@@ -326,5 +331,187 @@ print("=====================================")
 Le tout est englobé dans des `print("=====================================")` pour améliorer la lisibilitée
 
 ## play() :
+
+**Initialisation des variables par default ou mise à zero :**
+
+- `nbr_murs=0`, Le nombre de murs touchés initiale, càd 0
+- `isPlay=True`, Variable qui controle la boucle principale de jeu, `True` pour que ça tourne LOL
+- `taille_grille=""`, La variable qui va recevoir la taille de la grille en input, initialisé pour permettre l'utilisation d'une boucle `while` pour l'input
+- `pos_joueur`, La variable qui va recevoir la position donnée par l'utilisateur, initialisé pour permettre l'utilisation d'une boucle `while`
+- 1<sup>ère</sup> consigne :
+  - `nbr_etoiles=0`, Le nombre d'étoiles touchées initiale, càd zero
+
+```python
+nbr_etoiles,nbr_murs,isPlay,taille_grille,pos_joueur=0,0,True,"",['default']
+```
+
+---
+
+### Traitement des inputs de taille et de position joueur :
+
+> J'ai découvert ici le `try` et tout ce qui l'entoure, c'est une ptn de dinguerie !!!
+
+**Premièrement** la taille de la map.  
+Une boucle `while` est initié afin de parer les entrées vide ou incorrectes.  
+On essaye (`try`) de transformer cette entrée en `int` car c'est un `string` par défault, si cela ne marche pas (`except`) on réinitialise la variable pour refaire un tour de boucle.  
+Si ça marche (`else`) on transforme l'entrée en `int` puis on vérifie qu'elle soit `<=` à 15 sinon on refait un tour.
+
+```python
+while taille_grille=="":
+    taille_grille=input("Taille de la grille souhaitée : ")
+    try:
+        int(taille_grille)
+    except:
+        taille_grille=""
+    else:
+        taille_grille=int(taille_grille)
+        if taille_grille>15:
+            taille_grille=""
+```
+
+**Deuxièmement** la position du départ souhaité.  
+Une boucle `while` est initié afin de parer les entrées vide ou incorrectes.  
+On met `a=0` pour l'utiliser comme compteur plus polyvalent.  
+Ensuite si l'entrée est celle par défault ou vide, on laisse passer pour faire un tour ou sortir une liste vide afin qu'elle soit générée plus tard.
+
+```python
+if pos_joueur!=['default'] and pos_joueur!=[]:
+```
+
+Dans le cas contraire, on va itérer dans cette `string` transformée en `list` (afin de permettre la suppresion).  
+A chaque caractère on essaye de le transformer en `int`, si ça marche on incrémente notre conteur sinon on vérifie si c'est une virgule pour la garder ou sinon supprimer l'intru.
+
+```python
+if pos_joueur!=['default'] and pos_joueur!=[]:
+    for i in range(len(pos_joueur)):
+        try:
+            int(pos_joueur[a])
+        except:
+            if pos_joueur[a]==',':
+                a+=1
+            else:
+                del pos_joueur[a]
+        else:
+            a+=1
+```
+
+Enfin, on itère dans cette liste de chiffre et de virgule pour reformer les potentiels nombres :
+> Ici, j'ai passé 15 mille ans avant de me rendre compte que `list/string[:X]` n'incluait pas `X`. J'ai peut être cassé plusieurs clavier.
+
+On initialise notre compteur `a=0`, notre `pos_joueur_temp=[]` et `isVirgule=False`.  
+Si c'est une virgule on le note, sinon on regarde si il y a une entrée précèdente dans la liste temporaire. Si ce n'est pas le cas on rajoute simplement le chiffre dans la liste temporaire.  
+Sinon, on vérifie si il y avait une virgule avant dans ce cas on `.append()` juste le chiffre, si il y en a pas on rajoute le chiffre à la chaine de chiffre du nombre précèdent.  
+Enfin on note le fait que ce n'était pas une virgule.
+
+```python
+pos_joueur_temp,isVirgule,a=[],False,0
+for i in pos_joueur:
+    if i==',':
+        isVirgule=True
+    else:
+        try:
+            pos_joueur_temp[a-1]
+        except:
+            pos_joueur_temp.append(i)
+            a+=1
+        else:
+            if isVirgule:
+                pos_joueur_temp.append(i)
+                a+=1
+            else:
+                pos_joueur_temp[a-1]=pos_joueur_temp[a-1][0:len(pos_joueur_temp[a-1])]+i
+        isVirgule=False
+```
+
+**Dernière étape,** on passe dans cette dernière liste temporaire pour y transformer toutes les chaines de chiffres en nombres.  
+On transfère la temporaire dans la principale avec toujours le `.copy()`.
+
+```python
+for i in range(len(pos_joueur_temp)):
+    pos_joueur_temp[i]=int(pos_joueur_temp[i])
+pos_joueur=pos_joueur_temp.copy()
+```
+
+### Récupération des variables générées :
+
+On met une variable `info_init` qui va contenir toutes les infos que renvoie `creation_grille_joueur` en lui donnant les inputs du joueur.  
+On met ensuite individuelement à jour chaque variable que l'on va réutiliser.
+
+- 1<sup>ère</sup> consigne :
+
+```python
+info_init=creation_grille_joueur(taille_grille,pos_joueur)
+grille_joueur,grille_murs,pos_joueur=info_init[0],info_init[1],info_init[2]
+```
+
+- 2<sup>ème</sup> consigne :
+
+```python
+info_init=creation_grille_joueur(taille_grille,pos_joueur)
+grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie=info_init[0],info_init[1],info_init[2],info_init[3],info_init[4]
+```
+
+### Boucle de jeu ENFINNNN !!! :
+
+```python
+while isPlay:
+```
+
+On commence par afficher grâce à la fonction homonyme et les variables souhaitées (`nbr_etoiles` ou pas) :
+
+```python
+affichage(grille_joueur,nbr_etoiles,nbr_murs)
+```
+
+On récupère ensuite les commandes du joueur en minuscule. Tant que c'est vide on redemande.
+
+```python
+commande=""
+while commande=="":
+    commande=str(input("Action souhaitée : ")).lower()
+```
+
+On vérifie que ce soit `"exit"` sinon on met à jour toutes les variables changées par la fonction `action()` auquel on à passé les variables spécifique à la consigne :
+
+```python
+if commande=="exit":
+    isPlay=False
+```
+
+- 1<sup>ère</sup> consigne :
+
+```python
+else:
+    info_mouv=action(commande,grille_joueur,grille_murs,pos_joueur,nbr_etoiles,nbr_murs)
+    grille_joueur,pos_joueur,nbr_etoiles,nbr_murs=info_mouv[0],info_mouv[1],info_mouv[2],info_mouv[3]
+```
+
+- 2<sup>ème</sup> consigne :
+
+```python
+else:
+    info_mouv=action(commande,grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie,nbr_murs)
+    grille_joueur,pos_joueur,nbr_murs=info_mouv[0],info_mouv[1],info_mouv[2]
+```
+
+**Enfin,** on vérifie la condition de victoire de la consigne et c'est GG!
+
+- 1<sup>ère</sup> consigne :
+
+```python
+if nbr_etoiles==taille_grille**2-1:
+    print("Bien joué, tu as touché",nbr_murs,"murs et attrapé",nbr_etoiles,"étoiles. GG ou pas")
+    isPlay=False
+```
+
+- 2<sup>ème</sup> consigne :
+
+```python
+if pos_joueur==pos_sortie:
+    print("Bien joué, tu as recommencé",nbr_murs,"fois avant de gagner. GG ou pas")
+    isPlay=False
+```
+
+# Le créateur de maps :
 
 
