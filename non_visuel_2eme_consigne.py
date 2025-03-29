@@ -49,12 +49,19 @@ def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
 
     return [grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie]
 
-def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,pos_joueur_init,pos_sortie:list,nbr_murs:int,win:bool):
+def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,pos_joueur_init:list,pos_sortie:list,nbr_murs:int,win:bool):
     """
 
     """
 
-    assert type(commande) == str, "L'input n'est pas un string"
+    assert type(commande) == str, "La commande n'est pas un string"
+    assert type(grille_joueur) == list, "grille_joueur n'est pas un list"
+    assert type(grille_murs) == tuple, "grille_murs n'est pas un tuple"
+    assert type(pos_joueur) == list, "pos_joueur n'est pas un list"
+    assert type(pos_joueur_init) == list, "pos_joueur_init n'est pas un list"
+    assert type(pos_sortie) == list, "pos_sortie n'est pas un list"
+    assert type(nbr_murs) == int, "nbr_murs n'est pas un int"
+    assert type(win) == bool, "win n'est pas un bool"
     
     for j in commande:
         if j=="d" or j=="droite":
@@ -144,6 +151,6 @@ def play():
         grille_joueur,pos_joueur,nbr_murs,win=info_mouv[0],info_mouv[1],info_mouv[2],info_mouv[3]
 
         if win:
-            print("Bien joué, tu as recommencé",nbr_murs,"fois. GG ou pas")
+            print("Bien joué, tu as recommencé",nbr_murs,"fois avant de gagner. GG ou pas")
             isPlay=False
         

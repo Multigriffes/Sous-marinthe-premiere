@@ -46,7 +46,12 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
 
     """
 
-    assert type(commande) == str, "L'input n'est pas un string"
+    assert type(commande) == str, "commande n'est pas un string"
+    assert type(grille_joueur) == list, "grille_joueur n'est pas un list"
+    assert type(grille_murs) == tuple, "grille_murs n'est pas un tuple"
+    assert type(pos_joueur) == list, "pos_joueur n'est pas un list"
+    assert type(nbr_etoiles) == int, "nbr_etoiles n'est pas un int"
+    assert type(nbr_murs) == int, "nbr_murs n'est pas un int"
     
     for j in commande:
         if j=="d" or j=="droite":
