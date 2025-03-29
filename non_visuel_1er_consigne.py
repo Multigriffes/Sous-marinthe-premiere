@@ -11,26 +11,20 @@ def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
     
     assert type(taille_grille)==int ;"la taille de la grille n'est pas un int"
     assert taille_grille>1, "Grille trop petite"
-    assert type(pos_joueur)==list ;"la position du joueur n'est pas une liste"
     assert taille_grille<=15 ;"On a pas autant de map que ça, 15 pas plus"
+    assert type(pos_joueur)==list ;"la position du joueur n'est pas une liste"
 
-    #Nettoyage de la liste de string de la position
-    a=0
-    for i in range(len(pos_joueur)):
-        try:
-            int(pos_joueur[a])
-        except:
-            del pos_joueur[a]
-        else:
-            pos_joueur[a]=int(pos_joueur[a])
-            a+=1
 
     #Génération ou vérification des coordonnée du joueur
+    if pos_joueur!=[]:
+        if pos_joueur[0] > taille_grille-1 or pos_joueur[1] > taille_grille-1:
+            print("Position hors du terrain, génération aléatoire...")
+            pos_joueur=[]
+        if len(pos_joueur)!=2:
+            print("Y a 2 nombres pour une coordonnées en 2D idiots, génération aléatoire...")
+            pos_joueur=[]
     if pos_joueur == [] :
         pos_joueur = [randint(0,taille_grille-1), randint(0,taille_grille-1)]
-    else :
-        assert pos_joueur[0] <= taille_grille-1 or pos_joueur[1] <= taille_grille-1, "Position hors du terrain"
-        assert len(pos_joueur) == 2 , "Y a 2 nombres pour une coordonnées en 2D idiots"
 
     #Creation de la grille du joueur
     grille_joueur = [["*" for i in range(taille_grille)] for b in range(taille_grille)]
@@ -108,7 +102,7 @@ def affichage(grille_joueur,nbr_etoiles,nbr_murs):
 
 def play():
     #Initialisation avec input joueur
-    nbr_etoiles,nbr_murs,isPlay,taille_grille=0,0,True,""
+    nbr_etoiles,nbr_murs,isPlay,taille_grille,pos_joueur=0,0,True,"",['default']
 
     while taille_grille=="":
         taille_grille=input("Taille de la grille souhaitée : ")
@@ -121,7 +115,20 @@ def play():
             if taille_grille>15:
                 taille_grille=""
 
-    pos_joueur=list(input("Position du joueur initiale si souhaité sinon laisser vide : "))
+    while pos_joueur==['default']:
+        pos_joueur=list(input("Position du joueur initiale si souhaité sinon laisser vide : "))
+        #Nettoyage de la liste de string de la position
+        a=0
+        if pos_joueur!=['default'] and pos_joueur!=[]:
+            for i in range(len(pos_joueur)):
+                try:
+                    int(pos_joueur[a])
+                except:
+                    del pos_joueur[a]
+                else:
+                    pos_joueur[a]=int(pos_joueur[a]) # type: ignore
+                    a+=1
+
     info_init=creation_grille_joueur(taille_grille,pos_joueur)
     grille_joueur,grille_murs,pos_joueur=info_init[0],info_init[1],info_init[2]
 
