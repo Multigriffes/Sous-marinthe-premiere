@@ -32,7 +32,7 @@ def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
     while pos_joueur==pos_sortie:
         pos_sortie=[randint(0,taille_grille-1),randint(0,taille_grille-1)]
 
-    #Creation de la grille du joueur
+    #Création de la grille du joueur
     grille_joueur = [["*" for i in range(taille_grille)] for b in range(taille_grille)]
     grille_joueur[pos_joueur[1]][pos_joueur[0]] = "O"
     grille_joueur[pos_sortie[1]][pos_sortie[0]] = "S"
