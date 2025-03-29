@@ -45,7 +45,7 @@ def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
 
 def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,pos_joueur_init:list,pos_sortie:list,nbr_murs:int,win:bool):
     """
-
+    La fonction gère les action du joueur et sont influence sur les diffèrentes variables du jeu
     """
 
     assert type(commande) == str, "La commande n'est pas un string"
