@@ -48,48 +48,45 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
     assert type(nbr_murs) == int, "nbr_murs n'est pas un int"
     
     for j in commande:
-        if j=="d" or j=="droite":
+        if j=="d":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][1]=="0":
                 grille_joueur[pos_joueur[1]][pos_joueur[0]]=" "
                 pos_joueur[0]+=1
                 if grille_joueur[pos_joueur[1]][pos_joueur[0]]=="*":
                     nbr_etoiles+=1
-                grille_joueur[pos_joueur[1]][pos_joueur[0]]="O"
             else:
                 print("C'est un MUR CHEHHHHH !!!!!!!!!!")
                 nbr_murs+=1
-        elif j=="g" or j=="gauche" or j=="q":
+        elif j=="g" or j=="q":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][0]=="0":
                 grille_joueur[pos_joueur[1]][pos_joueur[0]]=" "
                 pos_joueur[0]-=1
                 if grille_joueur[pos_joueur[1]][pos_joueur[0]]=="*":
                     nbr_etoiles+=1
-                grille_joueur[pos_joueur[1]][pos_joueur[0]]="O"
             else:
                 print("C'est un MUR CHEHHHHH !!!!!!!!!!")
                 nbr_murs+=1
-        elif j=="h" or j=="haut" or j=="z":
+        elif j=="h" or j=="z":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][2]=="0":
                 grille_joueur[pos_joueur[1]][pos_joueur[0]]=" "
                 pos_joueur[1]-=1
                 if grille_joueur[pos_joueur[1]][pos_joueur[0]]=="*":
                     nbr_etoiles+=1
-                grille_joueur[pos_joueur[1]][pos_joueur[0]]="O"
             else:
                 print("C'est un MUR CHEHHHHH !!!!!!!!!!")
                 nbr_murs+=1
-        elif j=="b" or j=="bas" or j=="s":
+        elif j=="b" or j=="s":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][3]=="0":
                 grille_joueur[pos_joueur[1]][pos_joueur[0]]=" "
                 pos_joueur[1]+=1
                 if grille_joueur[pos_joueur[1]][pos_joueur[0]]=="*":
                     nbr_etoiles+=1
-                grille_joueur[pos_joueur[1]][pos_joueur[0]]="O"
             else:
                 print("C'est un MUR CHEHHHHH !!!!!!!!!!")
                 nbr_murs+=1
         else:
             print(j+" : La commande n'est pas reconnu")
+    grille_joueur[pos_joueur[1]][pos_joueur[0]]="O"   
     return [grille_joueur,pos_joueur,nbr_etoiles,nbr_murs]
 
 def affichage(grille_joueur,nbr_etoiles,nbr_murs):

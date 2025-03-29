@@ -65,7 +65,6 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,pos_
                 print("C'est un MUR CHEHHHHH !!!!!!!!!!")
                 nbr_murs+=1
                 pos_joueur=pos_joueur_init.copy()
-            grille_joueur[pos_joueur[1]][pos_joueur[0]]="O"
         elif j=="g" or j=="gauche" or j=="q":
             grille_joueur[pos_joueur[1]][pos_joueur[0]]="*"
             if grille_murs[pos_joueur[1]][pos_joueur[0]][0]=="0":
@@ -74,7 +73,6 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,pos_
                 print("C'est un MUR CHEHHHHH !!!!!!!!!!")
                 nbr_murs+=1
                 pos_joueur=pos_joueur_init.copy()
-            grille_joueur[pos_joueur[1]][pos_joueur[0]]="O"
         elif j=="h" or j=="haut" or j=="z":
             grille_joueur[pos_joueur[1]][pos_joueur[0]]="*"
             if grille_murs[pos_joueur[1]][pos_joueur[0]][2]=="0":
@@ -83,7 +81,6 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,pos_
                 print("C'est un MUR CHEHHHHH !!!!!!!!!!")
                 nbr_murs+=1
                 pos_joueur=pos_joueur_init.copy()
-            grille_joueur[pos_joueur[1]][pos_joueur[0]]="O"
         elif j=="b" or j=="bas" or j=="s":
             grille_joueur[pos_joueur[1]][pos_joueur[0]]="*"
             if grille_murs[pos_joueur[1]][pos_joueur[0]][3]=="0":
@@ -92,9 +89,9 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,pos_
                 print("C'est un MUR CHEHHHHH !!!!!!!!!!")
                 nbr_murs+=1
                 pos_joueur=pos_joueur_init.copy()
-            grille_joueur[pos_joueur[1]][pos_joueur[0]]="O"
         else:
             print(j+" : La commande n'est pas reconnu")
+    grille_joueur[pos_joueur[1]][pos_joueur[0]]="O"
     grille_joueur[pos_sortie[1]][pos_sortie[0]]="S"
     return [grille_joueur,pos_joueur,nbr_murs]
     
