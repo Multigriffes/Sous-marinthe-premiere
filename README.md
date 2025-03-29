@@ -514,4 +514,4 @@ if pos_joueur==pos_sortie:
 
 # Le créateur de maps :
 
-
+## Un jour peut être si j'ai pas la flemme
