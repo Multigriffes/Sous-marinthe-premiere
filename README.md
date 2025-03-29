@@ -110,25 +110,25 @@ Le jeu se termine quand le joueur atteind la sortie : `Bien joué, tu as recomme
 
 Le jeu consiste en 3 fonctions principales et une fonction d'affichage :
 
-- creation_grille_joueur()
-- action()
-- play()
-- affichage()
+- [creation_grille_joueur()](#creation_grille_joueur-)
+- [action()](#action-)
+- [play()](#play-)
+- [affichage()](#affichage-)
 
 ## creation_grille_joueur() :
 
 **Premièrement,** la fonction va vérifier la cohérence des coordonnées données en entrée, le cas échéant en générer des nouvelles aléatoirement :
 
 ```python
-    if pos_joueur!=[]:
-        if pos_joueur[0] > taille_grille-1 or pos_joueur[1] > taille_grille-1:
-            print("Position hors du terrain, génération aléatoire...")
-            pos_joueur=[]
-        if len(pos_joueur)!=2 and len(pos_joueur)!=0:
-            print("Y a 2 nombres pour une coordonnées en 2D idiots, génération aléatoire...")
-            pos_joueur=[]
-    if pos_joueur == [] :
-        pos_joueur = [randint(0,taille_grille-1), randint(0,taille_grille-1)]
+if pos_joueur!=[]:
+    if pos_joueur[0] > taille_grille-1 or pos_joueur[1] > taille_grille-1:
+        print("Position hors du terrain, génération aléatoire...")
+        pos_joueur=[]
+    if len(pos_joueur)!=2 and len(pos_joueur)!=0:
+        print("Y a 2 nombres pour une coordonnées en 2D idiots, génération aléatoire...")
+        pos_joueur=[]
+if pos_joueur == [] :
+    pos_joueur = [randint(0,taille_grille-1), randint(0,taille_grille-1)]
 ```
 
 Une ligne est rajouté pour la 2<sup>ème</sup> consigne afin de sauvegarder les coordonnées initiales. Le `.copy()` sert à ne pas lier les deux listes :
