@@ -13,7 +13,7 @@ Toutes les cartes sont enregistrées dans une grande liste `liste_maps` qui stoc
 
 Le joueur évolue dans une grille carré où il est représenté par un 'O' et potentiellement la sortie par un 'S'. Des murs sont présents comme un labyrinthe mais ils ne sont pas montré au joueur, il doit les deviner au fur et à mesure de la partie.
 
-```python
+```text
 ['*', '*', '*', '*', '*']
 ['O', '*', '*', '*', '*']
 ['*', '*', '*', 'S', '*']
