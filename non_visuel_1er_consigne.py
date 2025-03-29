@@ -97,7 +97,15 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
         else:
             print(j+" : La commande n'est pas reconnu")
     return [grille_joueur,pos_joueur,nbr_etoiles,nbr_murs]
-    
+
+def affichage(grille_joueur,nbr_etoiles,nbr_murs):
+    print("=====================================")
+    for i in grille_joueur:
+        print(i)
+    print("Nombres d'étoiles obtenues : ", nbr_etoiles)
+    print("Nombres de murs touchés : ", nbr_murs)
+    print("=====================================")
+
 def play():
     #Initialisation avec input joueur
     nbr_etoiles,nbr_murs,isPlay,taille_grille=0,0,True,""
@@ -119,12 +127,7 @@ def play():
 
     while isPlay:
         #Affichage
-        print("=====================================")
-        for i in grille_joueur:
-            print(i)
-        print("Nombres d'étoiles obtenues : ", nbr_etoiles)
-        print("Nombres de murs touchés : ", nbr_murs)
-        print("=====================================")
+        affichage(grille_joueur,nbr_etoiles,nbr_murs)
         
         #Instructions de jeu et mise à jour des variables
         commande=""

@@ -112,6 +112,12 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,pos_
             print(j+" : La commande n'est pas reconnu")
     return [grille_joueur,pos_joueur,nbr_murs,win]
     
+def affichage(grille_joueur,nbr_murs):
+    print("=====================================")
+    for i in grille_joueur:
+        print(i)
+    print("Nombres de murs touchés : ", nbr_murs)
+    print("=====================================")
 def play():
     #Initialisation avec input joueur
     nbr_murs,isPlay,taille_grille,win=0,True,"",False
@@ -133,11 +139,7 @@ def play():
 
     while isPlay:
         #Affichage
-        print("=====================================")
-        for i in grille_joueur:
-            print(i)
-        print("Nombres de murs touchés : ", nbr_murs)
-        print("=====================================")
+        affichage(grille_joueur,nbr_murs)
         
         #Instructions de jeu et mise à jour des variables
         commande=""
