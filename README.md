@@ -6,7 +6,7 @@
 ***Les consignes ayant changée, deux fichier sont présent afin de pouvoir jouer aux deux jeux différents.  
 La doc devrait expliquer de manière clair quand des différences sont présentes***
 
-## Principe de base :
+# Principe de base :
 
 > [!IMPORTANT]  
 Les coordonnées du joueur sont dans la liste pos_joueur de la forme `[X,Y]` avec X vers la "droite" et Y vers le "bas".  
