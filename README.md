@@ -238,20 +238,20 @@ On vérifie le présence d'un mur du coté du déplacement (`X` le coté à vér
 On modifie la position du joueur avec l'axe (`0`/`1`) et le sens (`+`/`-`) ligne 2.  
 Enfin si la case atteinte contient une étoile, on incrémente le conteur d'étoiles.
 
->```python  
->if grille_murs[pos_joueur[1]][pos_joueur[0]][X]=="0":
->   pos_joueur[0]-=1
->   if grille_joueur[pos_joueur[1]][pos_joueur[0]]=="*":
->       nbr_etoiles+=1
->```
+```python  
+if grille_murs[pos_joueur[1]][pos_joueur[0]][X]=="0":
+   pos_joueur[0]-=1
+   if grille_joueur[pos_joueur[1]][pos_joueur[0]]=="*":
+       nbr_etoiles+=1
+```
 
 Dans l'éventualité où il y est un mur du coté souhaité, on diffuse un message d'amour puis on incrémente le conteur de murs.
 
->```python  
->else:
->    print("C'est un MUR CHEHHHHH !!!!!!!!!!")
->    nbr_murs+=1
->```
+```python  
+else:
+    print("C'est un MUR CHEHHHHH !!!!!!!!!!")
+    nbr_murs+=1
+```
 
 ### Traitement 2<sup>ème</sup> consigne type :
 
