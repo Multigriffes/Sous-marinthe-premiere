@@ -90,6 +90,20 @@ def murs_communs(taille,grille_murs):
                     grille_murs[i][j+1]="1"+grille_murs[i][j+1][1]+grille_murs[i][j+1][2]+grille_murs[i][j+1][3]
     return grille_murs
             
+def traitement_commande(commande:str):
+    gauche,droite,haut,bas=False,False,False,False
+    for n in commande:
+        if n=="z":     
+            haut = not haut
+        elif n=="q":
+            gauche = not gauche
+        elif n=="s":
+            bas = not bas
+        elif n=="d":
+            droite = not droite
+        else:
+            print(n+': commande non reconnue')
+    return gauche,droite,haut,bas
 
 def creation_map_intereactive(taille:int):
     assert taille>1, "trop petite carte"
@@ -118,16 +132,7 @@ def creation_map_intereactive(taille:int):
                             grille_murs[i][j-1]="X"
                         affichage_grille(grille_murs)
                         commande_back=input("zqsd pour murs précèdent : ").lower()
-                        _gauche,_droite,_haut,_bas=False,False,False,False
-                        for n in commande_back:
-                            if n=="z":     
-                                _haut = not _haut
-                            elif n=="q":
-                                _gauche = not _gauche
-                            elif n=="s":
-                                _bas = not _bas
-                            elif n=="d":
-                                _droite = not _droite
+                        _gauche,_droite,_haut,_bas=traitement_commande(commande_back)
                         if j-1<0:
                             grille_murs[i-1][taille-1]=murs_convert(_gauche,_droite,_haut,_bas)
                         else:
@@ -136,17 +141,7 @@ def creation_map_intereactive(taille:int):
                         affichage_grille(grille_murs)
                 
             #Traitement de la commande
-            for b in commande:
-                if b=="z":     
-                    haut = not haut
-                elif b=="q":
-                    gauche = not gauche
-                elif b=="s":
-                    bas = not bas
-                elif b=="d":
-                    droite = not droite
-                else:
-                    print(b+': commande non reconnue')
+            gauche,droite,haut,bas=traitement_commande(commande)
             grille_murs[i][j]=murs_convert(gauche,droite,haut,bas)
 
     #Mise en place des murs obligatoires ou déduis
