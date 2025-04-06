@@ -125,14 +125,14 @@ def creation_map_intereactive(taille:int):
             while commande==" ":
                 commande=input("zqsd pour murs, c pour revenir de 1 : ").lower()
 
-                #Cas d'une erreur sur l'entrée précèdente
+                #Cas d'une erreur sur l'entree precedente
                 for b in commande:
                     if b=="c":
                         commande="c"
                 if commande=="c":
                     commande=" "   
                     if j-1<0 and i-1<0:
-                        print('Pas possible de revenir en arrière')
+                        print('Pas possible de revenir en arriere')
                     else:
                         grille_murs[i][j]=" "
                         if j-1<0:
@@ -140,7 +140,7 @@ def creation_map_intereactive(taille:int):
                         else:
                             grille_murs[i][j-1]="X"
                         affichage_grille(grille_murs)
-                        commande_back=input("zqsd pour murs précèdent : ").lower()
+                        commande_back=input("zqsd pour murs precedent : ").lower()
                         _gauche,_droite,_haut,_bas=traitement_commande(commande_back)
                         if j-1<0:
                             grille_murs[i-1][taille-1]=murs_convert(_gauche,_droite,_haut,_bas)
@@ -153,7 +153,7 @@ def creation_map_intereactive(taille:int):
             gauche,droite,haut,bas=traitement_commande(commande)
             grille_murs[i][j]=murs_convert(gauche,droite,haut,bas)
 
-    #Mise en place des murs obligatoires ou déduis
+    #Mise en place des murs obligatoires ou deduis
     grille_murs=murs_cotes(taille,grille_murs)
     grille_murs=murs_communs(taille,grille_murs)
     

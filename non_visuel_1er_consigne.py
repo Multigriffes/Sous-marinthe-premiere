@@ -6,7 +6,7 @@ liste_map=generation_liste()
 #Creation des grilles
 def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
     """
-    Cette fonction créé la liste représentant la grille et représente le joueur dessus à l'aide 
+    Cette fonction cree la liste representant la grille et represente le joueur dessus à l'aide 
     d'un "O" et les cases vides avec un "*"
     """
     
@@ -16,18 +16,18 @@ def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
     assert type(pos_joueur)==list ;"la position du joueur n'est pas une liste"
 
 
-    #Génération ou vérification des coordonnée du joueur
+    #Generation ou verification des coordonnee du joueur
     if pos_joueur!=[]:
         if pos_joueur[0] > taille_grille-1 or pos_joueur[1] > taille_grille-1:
-            print("Position hors du terrain, génération aléatoire...")
+            print("Position hors du terrain, generation aleatoire...")
             pos_joueur=[]
         if len(pos_joueur)!=2 and len(pos_joueur)!=0:
-            print("Y a 2 nombres pour une coordonnées en 2D idiots, génération aléatoire...")
+            print("Y a 2 nombres pour une coordonnees en 2D idiots, generation aleatoire...")
             pos_joueur=[]
     if pos_joueur == [] :
         pos_joueur = [randint(0,taille_grille-1), randint(0,taille_grille-1)]
 
-    #Création de la grille du joueur
+    #Creation de la grille du joueur
     grille_joueur = [["*" for i in range(taille_grille)] for b in range(taille_grille)]
     grille_joueur[pos_joueur[1]][pos_joueur[0]] = "O"
 
@@ -38,7 +38,7 @@ def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
 
 def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_etoiles:int,nbr_murs:int):
     """
-    La fonction gère les action du joueur et sont influence sur les diffèrentes variables du jeu
+    La fonction gere les action du joueur et sont influence sur les differentes variables du jeu
     """
 
     assert type(commande) == str, "commande n'est pas un string"
@@ -96,8 +96,8 @@ def affichage(grille_joueur,nbr_etoiles,nbr_murs):
     print("=====================================")
     for i in grille_joueur:
         print(i)
-    print("Nombres d'étoiles obtenues :", nbr_etoiles)
-    print("Nombres de murs touchés :", nbr_murs)
+    print("Nombres d'etoiles obtenues :", nbr_etoiles)
+    print("Nombres de murs touches :", nbr_murs)
     print("=====================================")
 
 def play():
@@ -105,7 +105,7 @@ def play():
     nbr_etoiles,nbr_murs,isPlay,taille_grille,pos_joueur=0,0,True,"",['default']
 
     while taille_grille=="":
-        taille_grille=input("Taille de la grille souhaitée : ")
+        taille_grille=input("Taille de la grille souhaitee : ")
         try:
             int(taille_grille)
         except:
@@ -116,7 +116,7 @@ def play():
                 taille_grille=""
 
     while pos_joueur==['default']:
-        pos_joueur=list(input("Position du joueur initiale si souhaité sinon laisser vide : "))
+        pos_joueur=list(input("Position du joueur initiale si souhaite sinon laisser vide : "))
         #Nettoyage de la liste de string de la position
         a=0
         if pos_joueur!=['default'] and pos_joueur!=[]:
@@ -161,7 +161,7 @@ def play():
         #Instructions de jeu et mise à jour des variables
         commande=""
         while commande=="":
-            commande=str(input("Action souhaitée : ")).lower()
+            commande=str(input("Action souhaitee : ")).lower()
         
         if commande=="exit":
             isPlay=False
@@ -170,6 +170,6 @@ def play():
             grille_joueur,pos_joueur,nbr_etoiles,nbr_murs=info_mouv[0],info_mouv[1],info_mouv[2],info_mouv[3]
 
         if nbr_etoiles==taille_grille**2-1:
-            print("Bien joué, tu as touché",nbr_murs,"murs et attrapé",nbr_etoiles,"étoiles. GG ou pas")
+            print("Bien joue, tu as touche",nbr_murs,"murs et attrape",nbr_etoiles,"etoiles. GG ou pas")
             isPlay=False
         
