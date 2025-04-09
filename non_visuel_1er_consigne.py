@@ -93,12 +93,7 @@ def affichage(grille_joueur,nbr_etoiles,nbr_murs):
     assert type(nbr_etoiles)==int, "nbr_etoiles n'est pas un int"
     assert type(nbr_murs)==int, "nbr_murs n'est pas un int"
 
-    print("=====================================")
-    for i in grille_joueur:
-        print(i)
-    print("Nombres d'étoiles obtenues :", nbr_etoiles)
-    print("Nombres de murs touchés :", nbr_murs)
-    print("=====================================")
+    #PYGAME
 
 def play():
     #Initialisation avec input joueur
