@@ -494,7 +494,6 @@ while commande=="":
 On vérifie que ce soit `"exit"` sinon on met à jour toutes les variables changées par la fonction `action()` auquel on à passé les variables spécifique à la consigne :  
 **Modification !** Par souci d'économie, la mise à jour des variables à été optimisée :
 
-
 ```python
 if commande=="exit":
     isPlay=False
