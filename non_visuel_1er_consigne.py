@@ -118,7 +118,7 @@ def play():
     while pos_joueur==['default']:
         pos_joueur=list(input("Position du joueur initiale si souhaite sinon laisser vide : "))
         #Nettoyage de la liste de string de la position
-        if pos_joueur!=['default'] and pos_joueur!=[]:#Vérification du besoin de nettoyer la liste
+        if pos_joueur!=['default'] and pos_joueur!=[]:#Verification du besoin de nettoyer la liste
             a=0
             for i in range(len(pos_joueur)):#Suppression de tout ce qui n'est pas un chiffre ou une virguel
                 try:
@@ -131,7 +131,7 @@ def play():
                 else:
                     a+=1
             pos_joueur_temp,isVirgule,a=[],False,0
-            for i in pos_joueur:#Rassemblement des potentiels nombre séparés par des virgules
+            for i in pos_joueur:#Rassemblement des potentiels nombre separes par des virgules
                 if i==',':
                     isVirgule=True
                 else:
