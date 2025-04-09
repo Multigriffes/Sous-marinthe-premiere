@@ -24,7 +24,7 @@ def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
         if len(pos_joueur)!=2 and len(pos_joueur)!=0:
             print("Y a 2 nombres pour une coordonnées en 2D idiots, génération aléatoire...")
             pos_joueur=[]
-    if pos_joueur == [] :
+    if pos_joueur == []:
         pos_joueur = [randint(0,taille_grille-1), randint(0,taille_grille-1)]
 
     #Création de la grille du joueur
@@ -118,9 +118,9 @@ def play():
     while pos_joueur==['default']:
         pos_joueur=list(input("Position du joueur initiale si souhaité sinon laisser vide : "))
         #Nettoyage de la liste de string de la position
-        a=0
-        if pos_joueur!=['default'] and pos_joueur!=[]:
-            for i in range(len(pos_joueur)):
+        if pos_joueur!=['default'] and pos_joueur!=[]:#Vérification du besoin de nettoyer la liste
+            a=0
+            for i in range(len(pos_joueur)):#Suppression de tout ce qui n'est pas un chiffre ou une virguel
                 try:
                     int(pos_joueur[a])
                 except:
@@ -131,7 +131,7 @@ def play():
                 else:
                     a+=1
             pos_joueur_temp,isVirgule,a=[],False,0
-            for i in pos_joueur:
+            for i in pos_joueur:#Rassemblement des potentiels nombre séparés par des virgules
                 if i==',':
                     isVirgule=True
                 else:
@@ -145,9 +145,9 @@ def play():
                             pos_joueur_temp.append(i)
                             a+=1
                         else:
-                            pos_joueur_temp[a-1]=pos_joueur_temp[a-1][0:len(pos_joueur_temp[a-1])]+i
+                            pos_joueur_temp[a-1]=pos_joueur_temp[a-1]+i
                     isVirgule=False
-            for i in range(len(pos_joueur_temp)):
+            for i in range(len(pos_joueur_temp)):#Transformation des str de nombre en int
                 pos_joueur_temp[i]=int(pos_joueur_temp[i])
             pos_joueur=pos_joueur_temp.copy()
 
@@ -155,7 +155,6 @@ def play():
     grille_joueur,grille_murs,pos_joueur=info_init[0],info_init[1],info_init[2]
 
     while isPlay:
-        #Affichage
         affichage(grille_joueur,nbr_etoiles,nbr_murs)
         
         #Instructions de jeu et mise à jour des variables
