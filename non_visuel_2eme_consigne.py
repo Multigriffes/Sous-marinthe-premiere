@@ -155,8 +155,7 @@ def play():
                 pos_joueur_temp[i]=int(pos_joueur_temp[i])
             pos_joueur=pos_joueur_temp.copy()
 
-    info_init=creation_grille_joueur(taille_grille,pos_joueur)
-    grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie=info_init[0],info_init[1],info_init[2],info_init[3],info_init[4]
+    grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie=creation_grille_joueur(taille_grille,pos_joueur)
 
     while isPlay:
         affichage(grille_joueur,nbr_murs)
@@ -169,8 +168,8 @@ def play():
         if commande=="exit":
             isPlay=False
         else:
-            info_mouv=action(commande,grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie,nbr_murs)
-            grille_joueur,pos_joueur,nbr_murs=info_mouv[0],info_mouv[1],info_mouv[2]
+            grille_joueur,pos_joueur,nbr_murs=action(commande,grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie,nbr_murs) # type: ignore
+
 
         if pos_joueur==pos_sortie:
             print("Bien joué, tu as recommencé",nbr_murs,"fois avant de gagner. GG ou pas")
