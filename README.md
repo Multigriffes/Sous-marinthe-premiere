@@ -436,8 +436,10 @@ pos_joueur=pos_joueur_temp.copy()
 
 ### Récupération des variables générées :
 
-On met une variable `info_init` qui va contenir toutes les infos que renvoie `creation_grille_joueur` en lui donnant les inputs du joueur.  
-On met ensuite individuelement à jour chaque variable que l'on va réutiliser.
+---
+
+~~On met une variable `info_init` qui va contenir toutes les infos que renvoie `creation_grille_joueur` en lui donnant les inputs du joueur.~~  
+~~On met ensuite individuelement à jour chaque variable que l'on va réutiliser.~~
 
 - 1<sup>ère</sup> consigne :
 
@@ -451,6 +453,22 @@ grille_joueur,grille_murs,pos_joueur=info_init[0],info_init[1],info_init[2]
 ```python
 info_init=creation_grille_joueur(taille_grille,pos_joueur)
 grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie=info_init[0],info_init[1],info_init[2],info_init[3],info_init[4]
+```
+
+---
+
+**Modification !** Par souci d'économie, la mise à jour des variables à été optimisée :
+
+- 1<sup>ère</sup> consigne :
+
+```python
+grille_joueur,grille_murs,pos_joueur=creation_grille_joueur(taille_grille,pos_joueur)
+```
+
+- 2<sup>ème</sup> consigne :
+
+```python
+grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie=creation_grille_joueur(taille_grille,pos_joueur)
 ```
 
 ### Boucle de jeu ENFINNN !!! :
@@ -473,7 +491,9 @@ while commande=="":
     commande=str(input("Action souhaitée : ")).lower()
 ```
 
-On vérifie que ce soit `"exit"` sinon on met à jour toutes les variables changées par la fonction `action()` auquel on à passé les variables spécifique à la consigne :
+On vérifie que ce soit `"exit"` sinon on met à jour toutes les variables changées par la fonction `action()` auquel on à passé les variables spécifique à la consigne :  
+**Modification !** Par souci d'économie, la mise à jour des variables à été optimisée :
+
 
 ```python
 if commande=="exit":
@@ -484,16 +504,14 @@ if commande=="exit":
 
 ```python
 else:
-    info_mouv=action(commande,grille_joueur,grille_murs,pos_joueur,nbr_etoiles,nbr_murs)
-    grille_joueur,pos_joueur,nbr_etoiles,nbr_murs=info_mouv[0],info_mouv[1],info_mouv[2],info_mouv[3]
+    grille_joueur,pos_joueur,nbr_etoiles,nbr_murs=action(commande,grille_joueur,grille_murs,pos_joueur,nbr_etoiles,nbr_murs)
 ```
 
 - 2<sup>ème</sup> consigne :
 
 ```python
 else:
-    info_mouv=action(commande,grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie,nbr_murs)
-    grille_joueur,pos_joueur,nbr_murs=info_mouv[0],info_mouv[1],info_mouv[2]
+    grille_joueur,pos_joueur,nbr_murs=action(commande,grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie,nbr_murs)
 ```
 
 **Enfin,** on vérifie la condition de victoire de la consigne et c'est GG!

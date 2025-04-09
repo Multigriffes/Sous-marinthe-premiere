@@ -151,8 +151,7 @@ def play():
                 pos_joueur_temp[i]=int(pos_joueur_temp[i])
             pos_joueur=pos_joueur_temp.copy()
 
-    info_init=creation_grille_joueur(taille_grille,pos_joueur)
-    grille_joueur,grille_murs,pos_joueur=info_init[0],info_init[1],info_init[2]
+    grille_joueur,grille_murs,pos_joueur=creation_grille_joueur(taille_grille,pos_joueur)
 
     while isPlay:
         affichage(grille_joueur,nbr_etoiles,nbr_murs)
@@ -165,8 +164,8 @@ def play():
         if commande=="exit":
             isPlay=False
         else:
-            info_mouv=action(commande,grille_joueur,grille_murs,pos_joueur,nbr_etoiles,nbr_murs)
-            grille_joueur,pos_joueur,nbr_etoiles,nbr_murs=info_mouv[0],info_mouv[1],info_mouv[2],info_mouv[3]
+            grille_joueur,pos_joueur,nbr_etoiles,nbr_murs=action(commande,grille_joueur,grille_murs,pos_joueur,nbr_etoiles,nbr_murs) # type: ignore
+
 
         if nbr_etoiles==taille_grille**2-1:
             print("Bien joué, tu as touché",nbr_murs,"murs et attrapé",nbr_etoiles,"étoiles. GG ou pas")
