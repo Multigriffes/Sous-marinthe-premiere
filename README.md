@@ -384,6 +384,7 @@ A chaque caractère on essaye de le transformer en `int`, si ça marche on incr�
 
 ```python
 if pos_joueur!=['default'] and pos_joueur!=[]:
+    a=0
     for i in range(len(pos_joueur)):
         try:
             int(pos_joueur[a])
@@ -420,7 +421,7 @@ for i in pos_joueur:
                 pos_joueur_temp.append(i)
                 a+=1
             else:
-                pos_joueur_temp[a-1]=pos_joueur_temp[a-1][0:len(pos_joueur_temp[a-1])]+i
+                pos_joueur_temp[a-1]=pos_joueur_temp[a-1]+i
         isVirgule=False
 ```
 
