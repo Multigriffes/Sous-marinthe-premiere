@@ -10,10 +10,10 @@ def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
     d'un "O" et les cases vides avec un "*"
     """
     
-    assert type(taille_grille)==int ;"la taille de la grille n'est pas un int"
+    assert type(taille_grille)==int ,"la taille de la grille n'est pas un int"
     assert taille_grille>1, "Grille trop petite"
-    assert taille_grille<=15 ;"On a pas autant de map que ça, 15 pas plus"
-    assert type(pos_joueur)==list ;"la position du joueur n'est pas une liste"
+    assert taille_grille<=15 ,"On a pas autant de map que ça, 15 pas plus"
+    assert type(pos_joueur)==list ,"la position du joueur n'est pas une liste"
 
 
     #Génération ou vérification des coordonnée du joueur
