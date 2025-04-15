@@ -116,11 +116,13 @@ Le jeu se termine quand le joueur atteind la sortie : `Bien joué, tu as recomme
 
 # Le code :
 
-Le jeu consiste en 3 fonctions principales et une fonction d'affichage :
+Le jeu consiste en 3 fonctions principales, deux fonctions de traitement d'entrées et une fonction d'affichage :
 
 - [creation_grille_joueur()](#creation_grille_joueur-)
 - [action()](#action-)
 - [affichage()](#affichage-)
+- [input_taille_grille()](#input_taille_grille-)
+- [input_pos_joueur()](#input_pos_joueur-) 
 - [play()](#play-)
 
 Tout le formatage des entrées utilisateur est traité dans la fonction `play()` avant d'être passé aux fonction les utilisant. On ne va donc pas les traiter dans les autres fonctions.
@@ -331,28 +333,15 @@ print("=====================================")
 
 Le tout est englobé dans des `print("=====================================")` pour améliorer la lisibilitée
 
-## play() :
-
-**Initialisation des variables par default ou mise à zero :**
-
-- `nbr_murs=0`, Le nombre de murs touchés initiale, càd 0
-- `isPlay=True`, Variable qui controle la boucle principale de jeu, `True` pour que ça tourne LOL
-- `taille_grille=""`, La variable qui va recevoir la taille de la grille en input, initialisé pour permettre l'utilisation d'une boucle `while` pour l'input
-- `pos_joueur`, La variable qui va recevoir la position donnée par l'utilisateur, initialisé pour permettre l'utilisation d'une boucle `while`
-- 1<sup>ère</sup> consigne :
-  - `nbr_etoiles=0`, Le nombre d'étoiles touchées initiale, càd zero
-
-```python
-nbr_etoiles,nbr_murs,isPlay,taille_grille,pos_joueur=0,0,True,"",['default']
-```
-
----
-
-### Traitement des inputs de taille et de position joueur :
+## input_taille_grille() :
 
 > J'ai découvert ici le `try` et tout ce qui l'entoure, c'est une ptn de dinguerie !!!
 
-**Premièrement** la taille de la map.  
+**Initialisation des variables par default ou mise à zero :**
+
+- `taille_grille=""`, La variable qui va recevoir la taille de la grille en input, initialisé pour permettre l'utilisation d'une boucle `while`
+
+Cette fonction va permettre de traiter la taille de la map souhaitée.  
 Une boucle `while` est initié afin de parer les entrées vide ou incorrectes.  
 On essaye (`try`) de transformer cette entrée en `int` car c'est un `string` par défault, si cela ne marche pas (`except`) on réinitialise la variable pour refaire un tour de boucle.  
 Si ça marche (`else`) on transforme l'entrée en `int` puis on vérifie qu'elle soit `<=` à 15 sinon on refait un tour.
@@ -370,7 +359,14 @@ while taille_grille=="":
             taille_grille=""
 ```
 
-**Deuxièmement** la position du départ souhaité.  
+## input_pos_joueur() :
+
+**Initialisation des variables par default ou mise à zero :**
+
+- `pos_joueur`, La variable qui va recevoir la position donnée par l'utilisateur, initialisé pour permettre l'utilisation d'une boucle `while`
+
+---
+Cette fonction va permettre de traiter la position du départ souhaité.  
 Une boucle `while` est initié afin de parer les entrées vide ou incorrectes.  
 On met `a=0` pour l'utiliser comme compteur plus polyvalent.  
 Ensuite si l'entrée est celle par défault ou vide, on laisse passer pour faire un tour ou sortir une liste vide afin qu'elle soit générée plus tard.
@@ -433,6 +429,21 @@ for i in range(len(pos_joueur_temp)):
     pos_joueur_temp[i]=int(pos_joueur_temp[i])
 pos_joueur=pos_joueur_temp.copy()
 ```
+
+## play() :
+
+**Initialisation des variables par default ou mise à zero :**
+
+- `nbr_murs=0`, Le nombre de murs touchés initiale, càd 0
+- `isPlay=True`, Variable qui controle la boucle principale de jeu, `True` pour que ça tourne LOL
+- 1<sup>ère</sup> consigne :
+  - `nbr_etoiles=0`, Le nombre d'étoiles touchées initiale, càd zero
+
+```python
+nbr_etoiles,nbr_murs,isPlay=0,0,True
+```
+
+---
 
 ### Récupération des variables générées :
 
