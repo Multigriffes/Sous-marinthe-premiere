@@ -108,12 +108,8 @@ def affichage(grille_joueur,nbr_etoiles,nbr_murs,screen):
 
     return screen
 
-
-
-def play():
-    #Initialisation avec input joueur
-    nbr_etoiles,nbr_murs,isPlay,taille_grille,pos_joueur=0,0,True,"",['default']
-
+def input_taille_grille():
+    taille_grille=""
     while taille_grille=="":
         taille_grille=input("Taille de la grille souhaitée : ")
         try:
@@ -124,7 +120,10 @@ def play():
             taille_grille=int(taille_grille)
             if taille_grille>15:
                 taille_grille=""
+    return taille_grille
 
+def input_pos_joueur():
+    pos_joueur=['default']
     while pos_joueur==['default']:
         pos_joueur=list(input("Position du joueur initiale si souhaité sinon laisser vide : "))
         #Nettoyage de la liste de string de la position
@@ -160,6 +159,15 @@ def play():
             for i in range(len(pos_joueur_temp)):#Transformation des str de nombre en int
                 pos_joueur_temp[i]=int(pos_joueur_temp[i])
             pos_joueur=pos_joueur_temp.copy()
+    return pos_joueur
+
+def play():
+    #Initialisation avec input joueur
+    nbr_etoiles,nbr_murs,isPlay=0,0,True
+
+    taille_grille=input_taille_grille()
+
+    pos_joueur=input_pos_joueur()
 
     grille_joueur,grille_murs,pos_joueur=creation_grille_joueur(taille_grille,pos_joueur)
 
