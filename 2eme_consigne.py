@@ -199,6 +199,6 @@ def play():
 
         if pos_joueur==pos_sortie:
             print("Bien joué, tu as recommencé",nbr_murs,"fois avant de gagner. GG ou pas")
-            pygame.time.wait(10000)
+            pygame.time.wait(5000)
             isPlay=False
             pygame.quit()

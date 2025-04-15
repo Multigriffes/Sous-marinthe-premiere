@@ -102,7 +102,7 @@ def affichage(grille_joueur,nbr_etoiles,nbr_murs,screen):
     assert type(nbr_murs)==int, "nbr_murs n'est pas un int"
 
     screen.blit(background,(0,0))
-    
+
 
     pygame.display.flip()
 
@@ -193,6 +193,6 @@ def play():
 
         if nbr_etoiles==taille_grille**2-1:
             print("Bien joué, tu as touché",nbr_murs,"murs et attrapé",nbr_etoiles,"étoiles. GG ou pas")
-            pygame.time.wait(10000)
+            pygame.time.wait(5000)
             isPlay=False
             pygame.quit()
