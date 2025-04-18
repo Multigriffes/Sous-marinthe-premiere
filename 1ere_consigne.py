@@ -2,7 +2,6 @@ from random import randint
 from generation_liste_maps import generation_liste
 import pygame
 
-liste_map=generation_liste()
 color={"blanc":(255,255,255),"noir":(0,0,0)}
 
 sous_marin=pygame.image.load("img/sousmarin.png")
