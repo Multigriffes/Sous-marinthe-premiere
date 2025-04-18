@@ -101,6 +101,9 @@ def affichage(grille_joueur,nbr_etoiles,nbr_murs):
     print("=====================================")
 
 def input_taille_grille():
+    '''
+    La fonction va gérer la demande de l'input du joueur pour la taille de la grille
+    '''
     taille_grille=""
     while taille_grille=="":
         taille_grille=input("Taille de la grille souhaitée : ")
@@ -115,6 +118,9 @@ def input_taille_grille():
     return taille_grille
 
 def input_pos_joueur():
+    '''
+    La fonction va gérer la demande de l'input joueur pour la position du joueur
+    '''
     pos_joueur=['default']
     while pos_joueur==['default']:
         pos_joueur=list(input("Position du joueur initiale si souhaité sinon laisser vide : "))
@@ -154,6 +160,9 @@ def input_pos_joueur():
     return pos_joueur
 
 def play():
+    '''
+    Fonction pour le lancement du jeu, initialisation des variables puis boucle de jeu
+    '''
     #Initialisation avec input joueur
     nbr_etoiles,nbr_murs,isPlay=0,0,True
 
@@ -162,7 +171,7 @@ def play():
 
     grille_joueur,grille_murs,pos_joueur=creation_grille_joueur(taille_grille,pos_joueur)
 
-    while isPlay:
+    while isPlay:#Boucle de jeu
         affichage(grille_joueur,nbr_etoiles,nbr_murs)
         
         #Instructions de jeu et mise à jour des variables
