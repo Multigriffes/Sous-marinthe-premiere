@@ -178,10 +178,11 @@ grille_joueur[pos_sortie[1]][pos_sortie[0]] = "S"
 ---
 **Puis,** on choisi la map aléatoirement parmie celles de la bonne taille.  
 On a `taille_grille-2` car -1 pour les indices qui commence à 0, puis -1 pour les maps 1x1 qui n'existent pas.  
-On utilise le `len()` pour s'adapter au nombre de maps d'une certaine taille et `-1` toujours pour une question d'indice.
+On utilise le `len()` pour s'adapter au nombre de maps d'une certaine taille et `-1` toujours pour une question d'indice.  
+Les maps de taille `x` sont stockée à l'indice `x-2`
 
 ```python
-grille_murs = liste_map[taille_grille-2][randint(0,len(liste_map[taille_grille-2])-1)]
+grille_murs = generation_liste()[taille_grille-2][randint(0,len(generation_liste()[taille_grille-2])-1)]
 ```
 
 ---
@@ -344,18 +345,18 @@ Le tout est englobé dans des `print("=====================================")` p
 Cette fonction va permettre de traiter la taille de la map souhaitée.  
 Une boucle `while` est initié afin de parer les entrées vide ou incorrectes.  
 On essaye (`try`) de transformer cette entrée en `int` car c'est un `string` par défault, si cela ne marche pas (`except`) on réinitialise la variable pour refaire un tour de boucle.  
-Si ça marche (`else`) on transforme l'entrée en `int` puis on vérifie qu'elle soit `<=` à 15 sinon on refait un tour.
+Si ça marche (`else`) on transforme l'entrée en `int` puis on vérifie qu'elle soit `<=` à 15 et `>=` à 2 sinon on refait un tour.
 
 ```python
 while taille_grille=="":
-    taille_grille=input("Taille de la grille souhaitée : ")
+    taille_grille=input("Taille de la grille souhaitée entre 2 et 15 : ")
     try:
         int(taille_grille)
     except:
         taille_grille=""
     else:
         taille_grille=int(taille_grille)
-        if taille_grille>15:
+        if taille_grille>15 or taille_grille<2:
             taille_grille=""
 ```
 
