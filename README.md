@@ -122,7 +122,7 @@ Le jeu consiste en 3 fonctions principales, deux fonctions de traitement d'entr�
 - [action()](#action-)
 - [affichage()](#affichage-)
 - [input_taille_grille()](#input_taille_grille-)
-- [input_pos_joueur()](#input_pos_joueur-) 
+- [input_pos_joueur()](#input_pos_joueur-)
 - [play()](#play-)
 
 Tout le formatage des entrées utilisateur est traité dans la fonction `play()` avant d'être passé aux fonction les utilisant. On ne va donc pas les traiter dans les autres fonctions.
