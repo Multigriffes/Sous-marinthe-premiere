@@ -2,7 +2,6 @@ from random import randint
 from generation_liste_maps import generation_liste
 import pygame
 
-liste_map=generation_liste()
 color={"blanc":(255,255,255),"noir":(0,0,0)}
 
 sous_marin=pygame.image.load("img/sousmarin.png")
@@ -16,7 +15,7 @@ background.fill(color["blanc"])
 def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
     """
     Cette fonction créé la liste représentant la grille et représente le joueur dessus à l'aide 
-    d'un "O" et les cases vides avec un "*" et la sorite avec un "S"
+    d'un "O" et les cases vides avec un "*" et la sortie avec un "S"
     """
     
     assert type(taille_grille)==int ,"la taille de la grille n'est pas un int"
@@ -49,7 +48,7 @@ def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
 
 
     #Choix de le map en fonction du nbr de cases
-    grille_murs = liste_map[taille_grille-2][randint(0,len(liste_map[taille_grille-2])-1)]
+    grille_murs = generation_liste()[taille_grille-2][randint(0,len(generation_liste()[taille_grille-2])-1)]
 
     return [grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie]
 
@@ -120,14 +119,14 @@ def input_taille_grille():
     '''
     taille_grille=""
     while taille_grille=="":
-        taille_grille=input("Taille de la grille souhaitée : ")
+        taille_grille=input("Taille de la grille souhaitée entre 2 et 15 : ")
         try:
             int(taille_grille)
         except:
             taille_grille=""
         else:
             taille_grille=int(taille_grille)
-            if taille_grille>15:
+            if taille_grille>15 or taille_grille<2:
                 taille_grille=""
     return taille_grille
 
