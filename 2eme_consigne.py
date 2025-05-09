@@ -186,6 +186,12 @@ def play():
     grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie,screen=creation_grille_joueur(taille_grille,pos_joueur)
 
     pygame.init()
+    
+    #Gestion du son/musique :
+    #musique
+    son = pygame.mixer.Sound('epical-music-background-337255.mp3')
+    son.play(loops=-1, maxtime=0, fade_ms=0)
+    
     screen=pygame.display.set_mode((750,550))
     screen.blit(background,(0,0))
     pygame.display.flip()
@@ -210,6 +216,9 @@ def play():
                         commande="q"
                 if event.type==pygame.KEYUP:
                     commande=""
+
+
+
 
         grille_joueur,pos_joueur,nbr_murs,screen=action(commande,grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie,nbr_murs,screen) # type: ignore
 
