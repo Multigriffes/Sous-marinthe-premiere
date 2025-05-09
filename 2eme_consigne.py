@@ -2,11 +2,14 @@ from random import randint
 from generation_liste_maps import generation_liste
 import pygame
 
-color={"blanc":(255,255,255),"noir":(0,0,0)}
-
 sous_marin=pygame.image.load("img/sousmarin.png")
 porte=pygame.image.load("img/porte.png")
 background=pygame.image.load("img/background.jpg")
+background=pygame.transform.scale(background,(1280, 720))
+background_labyrinthe=pygame.Surface((1100,700))
+background_score=pygame.Surface((120,700))
+background_labyrinthe.fill((0,0,0))
+background_score.fill((255,255,255))
 
 
 
@@ -106,7 +109,8 @@ def affichage(grille_joueur,nbr_murs,screen):
     assert type(nbr_murs)==int, "nbr_murs n'est pas un int"
 
     screen.blit(background,(0,0))
-
+    screen.blit(background_labyrinthe,(20,10))
+    screen.blit(background_score,(1140,10))
 
     pygame.display.flip()
 
@@ -185,15 +189,14 @@ def play():
     grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie,screen=creation_grille_joueur(taille_grille,pos_joueur)
 
     pygame.init()
-    
+    screen=pygame.display.set_mode((1280, 720))
+    screen.blit(background,(0,0))
+    pygame.display.flip()
+
     #Gestion du son/musique :
     #musique
     son = pygame.mixer.Sound('epical-music-background-337255.mp3')
     son.play(loops=-1, maxtime=0, fade_ms=0)
-    
-    screen=pygame.display.set_mode((1280,720))
-    screen.blit(background,(0,0))
-    pygame.display.flip()
 
     while isPlay:#Boucle de jeu
         screen=affichage(grille_joueur,nbr_murs,screen)

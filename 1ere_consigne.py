@@ -6,7 +6,10 @@ sous_marin=pygame.image.load("img/sousmarin.png")
 etoile=pygame.image.load("img/etoile.png")
 background=pygame.image.load("img/background.jpg")
 background=pygame.transform.scale(background,(1280, 720))
-
+background_labyrinthe=pygame.Surface((1100,700))
+background_score=pygame.Surface((120,700))
+background_labyrinthe.fill((0,0,0))
+background_score.fill((255,255,255))
 
 
 #Creation des grilles
@@ -100,7 +103,8 @@ def affichage(grille_joueur,nbr_etoiles,nbr_murs,screen):
     assert type(nbr_murs)==int, "nbr_murs n'est pas un int"
 
     screen.blit(background,(0,0))
-
+    screen.blit(background_labyrinthe,(20,10))
+    screen.blit(background_score,(1140,10))
     pygame.display.flip()
 
     return screen
@@ -181,6 +185,11 @@ def play():
     screen=pygame.display.set_mode((1280, 720))
     screen.blit(background,(0,0))
     pygame.display.flip()
+
+    #Gestion du son/musique :
+    #musique
+    son = pygame.mixer.Sound('epical-music-background-337255.mp3')
+    son.play(loops=-1, maxtime=0, fade_ms=0)
 
     while isPlay:#Boucle de jeu
         screen=affichage(grille_joueur,nbr_etoiles,nbr_murs,screen)
