@@ -9,6 +9,10 @@ etoile=pygame.image.load("img/etoile.png")
 sortie=pygame.image.load("img/porte.png")
 background=pygame.Surface((550,550))
 background.fill(color["blanc"])
+musique_d_ambiance= pygame.mixer.Sound('epical-music-background-337255.mp3')
+musique_d_ambiance.play(loops=-1, maxtime=0, fade_ms=0)
+deplacement_sound= pygame.mixer.Sound('pop-331049.mp3')
+
 
 
 #Creation des grilles
@@ -70,6 +74,7 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,pos_
         if j=="d":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][1]=="0":
                 pos_joueur[0]+=1
+                deplacement_sound.play(loops=0, maxtime=0, fade_ms=0)
             else:
                 nbr_murs+=1
                 print("C'est un MUR CHEHHHHH !!!!!!!!!!")
@@ -77,6 +82,7 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,pos_
         elif j=="g" or j=="q":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][0]=="0":
                 pos_joueur[0]-=1
+                deplacement_sound.play(loops=0, maxtime=0, fade_ms=0)
             else:
                 nbr_murs+=1
                 print("C'est un MUR CHEHHHHH !!!!!!!!!!")
@@ -84,6 +90,7 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,pos_
         elif j=="h" or j=="z":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][2]=="0":
                 pos_joueur[1]-=1
+                deplacement_sound.play(loops=0, maxtime=0, fade_ms=0)
             else:
                 nbr_murs+=1
                 print("C'est un MUR CHEHHHHH !!!!!!!!!!")
@@ -91,6 +98,7 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,pos_
         elif j=="b" or j=="s":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][3]=="0":
                 pos_joueur[1]+=1
+                deplacement_sound.play(loops=0, maxtime=0, fade_ms=0)
             else:
                 nbr_murs+=1
                 print("C'est un MUR CHEHHHHH !!!!!!!!!!")
@@ -186,12 +194,7 @@ def play():
     grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie,screen=creation_grille_joueur(taille_grille,pos_joueur)
 
     pygame.init()
-    
-    #Gestion du son/musique :
-    #musique
-    son = pygame.mixer.Sound('epical-music-background-337255.mp3')
-    son.play(loops=-1, maxtime=0, fade_ms=0)
-    
+
     screen=pygame.display.set_mode((750,550))
     screen.blit(background,(0,0))
     pygame.display.flip()
