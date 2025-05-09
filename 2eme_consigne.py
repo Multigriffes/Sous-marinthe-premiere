@@ -189,8 +189,8 @@ def play():
     
     #Gestion du son/musique :
     #musique
-    pygame.mixer.music.load('epical-music-background-337255.mp3')
-    pygame.mixer.music.play(loops=-1)
+    son = pygame.mixer.Sound('epical-music-background-337255.mp3')
+    son.play(loops=-1, maxtime=0, fade_ms=0)
     
     screen=pygame.display.set_mode((750,550))
     screen.blit(background,(0,0))
