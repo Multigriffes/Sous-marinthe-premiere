@@ -5,10 +5,9 @@ import pygame
 color={"blanc":(255,255,255),"noir":(0,0,0)}
 
 sous_marin=pygame.image.load("img/sousmarin.png")
-etoile=pygame.image.load("img/etoile.png")
-sortie=pygame.image.load("img/porte.png")
-background=pygame.Surface((550,550))
-background.fill(color["blanc"])
+porte=pygame.image.load("img/porte.png")
+background=pygame.image.load("img/background.jpg")
+
 
 
 #Creation des grilles
@@ -100,7 +99,7 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,pos_
     grille_joueur[pos_joueur[1]][pos_joueur[0]]="O"
     grille_joueur[pos_sortie[1]][pos_sortie[0]]="S"
     return [grille_joueur,pos_joueur,nbr_murs,screen]
-    
+
 def affichage(grille_joueur,nbr_murs,screen):
 
     assert type(grille_joueur)==list, "grille_joueur n'est pas une liste"
@@ -192,7 +191,7 @@ def play():
     son = pygame.mixer.Sound('epical-music-background-337255.mp3')
     son.play(loops=-1, maxtime=0, fade_ms=0)
     
-    screen=pygame.display.set_mode((750,550))
+    screen=pygame.display.set_mode((1280,720))
     screen.blit(background,(0,0))
     pygame.display.flip()
 
@@ -204,6 +203,7 @@ def play():
             for event in pygame.event.get():
                 if event.type==pygame.QUIT:
                     isPlay=False
+                    commande='quit'
                     pygame.quit()
                 if event.type==pygame.KEYDOWN:
                     if event.key==pygame.K_z or event.key==pygame.K_UP:
@@ -216,11 +216,8 @@ def play():
                         commande="q"
                 if event.type==pygame.KEYUP:
                     commande=""
-
-
-
-
-        grille_joueur,pos_joueur,nbr_murs,screen=action(commande,grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie,nbr_murs,screen) # type: ignore
+        if commande!='quit':
+            grille_joueur,pos_joueur,nbr_murs,screen=action(commande,grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie,nbr_murs,screen) # type: ignore
 
         if pos_joueur==pos_sortie:
             print("Bien joué, tu as recommencé",nbr_murs,"fois avant de gagner. GG ou pas")
