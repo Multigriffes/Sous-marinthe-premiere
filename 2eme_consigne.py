@@ -2,17 +2,15 @@ from random import randint
 from generation_liste_maps import generation_liste
 import pygame
 
-color={"blanc":(255,255,255),"noir":(0,0,0)}
-
 sous_marin=pygame.image.load("img/sousmarin.png")
-etoile=pygame.image.load("img/etoile.png")
 sortie=pygame.image.load("img/porte.png")
-background=pygame.Surface((550,550))
-background.fill(color["blanc"])
-musique_d_ambiance= pygame.mixer.Sound('epical-music-background-337255.mp3')
-musique_d_ambiance.play(loops=-1, maxtime=0, fade_ms=0)
-deplacement_sound= pygame.mixer.Sound('pop-331049.mp3')
 
+background=pygame.image.load("img/background.jpg")
+background=pygame.transform.scale(background,(1280, 720))
+background_labyrinthe=pygame.Surface((1100,700))
+background_score=pygame.Surface((120,700))
+background_labyrinthe.fill((0,0,0))
+background_score.fill((255,255,255))
 
 
 #Creation des grilles
@@ -198,6 +196,11 @@ def play():
     screen=pygame.display.set_mode((750,550))
     screen.blit(background,(0,0))
     pygame.display.flip()
+
+    #Gestion du son/musique :
+    #musique
+    son = pygame.mixer.Sound('sound/epical-music-background-337255.mp3')
+    son.play(loops=-1, maxtime=0, fade_ms=0)
 
     while isPlay:#Boucle de jeu
         screen=affichage(grille_joueur,nbr_murs,screen)

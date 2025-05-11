@@ -11,10 +11,6 @@ background_labyrinthe=pygame.Surface((1100,700))
 background_score=pygame.Surface((120,700))
 background_labyrinthe.fill((0,0,0))
 background_score.fill((255,255,255))
-musique_d_ambiance= pygame.mixer.Sound('epical-music-background-337255.mp3')
-musique_d_ambiance.play(loops=-1, maxtime=0, fade_ms=0)
-deplacement_sound= pygame.mixer.Sound('pop-331049.mp3')
-
 
 #Creation des grilles
 def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
@@ -196,7 +192,7 @@ def play():
 
     #Gestion du son/musique :
     #musique
-    son = pygame.mixer.Sound('epical-music-background-337255.mp3')
+    son = pygame.mixer.Sound('sound/epical-music-background-337255.mp3')
     son.play(loops=-1, maxtime=0, fade_ms=0)
 
     while isPlay:#Boucle de jeu
