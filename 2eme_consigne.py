@@ -2,16 +2,17 @@ from random import randint
 from generation_liste_maps import generation_liste
 import pygame
 
-sous_marin=pygame.image.load("img/sousmarin.png")
-sortie=pygame.image.load("img/porte.png")
+screenXY=(1920,1080)
+windowXY=(0.6*screenXY[0],0.6*screenXY[1])
+background_labyrintheXY=(0.86*windowXY[0],0.97*windowXY[1])
+background_scoreXY=(0.1*windowXY[0],0.97*windowXY[1])
 
 background=pygame.image.load("img/background.jpg")
-background=pygame.transform.scale(background,(1280, 720))
-background_labyrinthe=pygame.Surface((1100,700))
-background_score=pygame.Surface((120,700))
+background=pygame.transform.scale(background,windowXY)
+background_labyrinthe=pygame.Surface(background_labyrintheXY)
+background_score=pygame.Surface(background_scoreXY)
 background_labyrinthe.fill((0,0,0))
 background_score.fill((255,255,255))
-
 
 #Creation des grilles
 def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
@@ -72,48 +73,52 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,pos_
         if j=="d":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][1]=="0":
                 pos_joueur[0]+=1
-                deplacement_sound.play(loops=0, maxtime=0, fade_ms=0)
             else:
                 nbr_murs+=1
-                print("C'est un MUR CHEHHHHH !!!!!!!!!!")
+                #screen=affichage_mur()
                 pos_joueur=pos_joueur_init.copy()
-        elif j=="g" or j=="q":
+        elif j=="q":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][0]=="0":
                 pos_joueur[0]-=1
-                deplacement_sound.play(loops=0, maxtime=0, fade_ms=0)
             else:
                 nbr_murs+=1
-                print("C'est un MUR CHEHHHHH !!!!!!!!!!")
+                #screen=affichage_mur()
                 pos_joueur=pos_joueur_init.copy()
-        elif j=="h" or j=="z":
+        elif j=="z":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][2]=="0":
                 pos_joueur[1]-=1
-                deplacement_sound.play(loops=0, maxtime=0, fade_ms=0)
             else:
                 nbr_murs+=1
-                print("C'est un MUR CHEHHHHH !!!!!!!!!!")
+                #screen=affichage_mur()
                 pos_joueur=pos_joueur_init.copy()
-        elif j=="b" or j=="s":
+        elif j=="s":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][3]=="0":
                 pos_joueur[1]+=1
-                deplacement_sound.play(loops=0, maxtime=0, fade_ms=0)
             else:
                 nbr_murs+=1
-                print("C'est un MUR CHEHHHHH !!!!!!!!!!")
+                #screen=affichage_mur()
                 pos_joueur=pos_joueur_init.copy()
         else:
             print(j+" : La commande n'est pas reconnu")
     grille_joueur[pos_joueur[1]][pos_joueur[0]]="O"
     grille_joueur[pos_sortie[1]][pos_sortie[0]]="S"
     return [grille_joueur,pos_joueur,nbr_murs,screen]
-    
-def affichage(grille_joueur,nbr_murs,screen):
+
+def affichage(grille_joueur,nbr_murs,screen,caseXY,sous_marin,sortie,case):
 
     assert type(grille_joueur)==list, "grille_joueur n'est pas une liste"
     assert type(nbr_murs)==int, "nbr_murs n'est pas un int"
 
     screen.blit(background,(0,0))
-
+    screen.blit(background_labyrinthe,(0.0156*windowXY[0],0.0139*windowXY[1]))
+    screen.blit(background_score,(0.89*windowXY[0],0.0139*windowXY[1]))
+    for y in range(len(grille_joueur)):
+        for x in range(len(grille_joueur)):
+            screen.blit(case,(0.0156*windowXY[0]+x*caseXY[0]+0.05*caseXY[0],0.0139*windowXY[1]+y*caseXY[1]+0.05*caseXY[1]))
+            if grille_joueur[y][x]=='O':
+                screen.blit(sous_marin,(0.0156*windowXY[0]+x*caseXY[0]+0.05*caseXY[0],0.0139*windowXY[1]+y*caseXY[1]+0.05*caseXY[1]))
+            elif grille_joueur[y][x]=='S':
+                screen.blit(sortie,(0.0156*windowXY[0]+x*caseXY[0]+0.05*caseXY[0],0.0139*windowXY[1]+y*caseXY[1]+0.05*caseXY[1]))
 
     pygame.display.flip()
 
@@ -184,33 +189,36 @@ def play():
     '''
     #Initialisation avec input joueur
     nbr_murs,isPlay=0,True
+    sous_marin=pygame.image.load("img/sousmarin.png")
+    sortie=pygame.image.load("img/porte.png")
 
     taille_grille=input_taille_grille()
+    caseXY=(background_labyrintheXY[0]/taille_grille,background_labyrintheXY[1]/taille_grille)
+    case=pygame.Surface((caseXY[0]*0.9,caseXY[1]*0.9))
+    case.fill((255,255,255))
+    sous_marin=pygame.transform.scale(sous_marin,(caseXY[0]*0.9,caseXY[1]*0.9))
+    sortie=pygame.transform.scale(sortie,(caseXY[0]*0.9,caseXY[1]*0.9))
 
     pos_joueur=input_pos_joueur()
 
-    grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie,screen=creation_grille_joueur(taille_grille,pos_joueur)
+    grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie=creation_grille_joueur(taille_grille,pos_joueur)
 
     pygame.init()
-
-    screen=pygame.display.set_mode((750,550))
-    screen.blit(background,(0,0))
-    pygame.display.flip()
+    screen=pygame.display.set_mode(windowXY)
 
     #Gestion du son/musique :
-    #musique
     son = pygame.mixer.Sound('sound/epical-music-background-337255.mp3')
     son.play(loops=-1, maxtime=0, fade_ms=0)
 
     while isPlay:#Boucle de jeu
-        screen=affichage(grille_joueur,nbr_murs,screen)
-        pygame.time.wait(500)
+        screen=affichage(grille_joueur,nbr_murs,screen,caseXY,sous_marin,sortie,case)
+        pygame.time.wait(50)
         commande=""
         while commande=="":
             for event in pygame.event.get():
                 if event.type==pygame.QUIT:
                     isPlay=False
-                    pygame.quit()
+                    commande='quit'
                 if event.type==pygame.KEYDOWN:
                     if event.key==pygame.K_z or event.key==pygame.K_UP:
                         commande="z"
@@ -222,12 +230,10 @@ def play():
                         commande="q"
                 if event.type==pygame.KEYUP:
                     commande=""
-
-
-
-
-        grille_joueur,pos_joueur,nbr_murs,screen=action(commande,grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie,nbr_murs,screen) # type: ignore
-
+        if commande!='quit':
+            grille_joueur,pos_joueur,nbr_murs,screen=action(commande,grille_joueur,grille_murs,pos_joueur,pos_joueur_init,pos_sortie,nbr_murs,screen) # type: ignore
+        else:
+            pygame.quit()
         if pos_joueur==pos_sortie:
             print("Bien joué, tu as recommencé",nbr_murs,"fois avant de gagner. GG ou pas")
             pygame.time.wait(5000)

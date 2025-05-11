@@ -2,13 +2,15 @@ from random import randint
 from generation_liste_maps import generation_liste
 import pygame
 
-sous_marin=pygame.image.load("img/sousmarin.png")
-etoile=pygame.image.load("img/etoile.png")
+screenXY=(1920,1080)
+windowXY=(0.6*screenXY[0],0.6*screenXY[1])
+background_labyrintheXY=(0.86*windowXY[0],0.97*windowXY[1])
+background_scoreXY=(0.1*windowXY[0],0.97*windowXY[1])
 
 background=pygame.image.load("img/background.jpg")
-background=pygame.transform.scale(background,(1280, 720))
-background_labyrinthe=pygame.Surface((1100,700))
-background_score=pygame.Surface((120,700))
+background=pygame.transform.scale(background,windowXY)
+background_labyrinthe=pygame.Surface(background_labyrintheXY)
+background_score=pygame.Surface(background_scoreXY)
 background_labyrinthe.fill((0,0,0))
 background_score.fill((255,255,255))
 
@@ -64,51 +66,55 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
                 pos_joueur[0]+=1
                 if grille_joueur[pos_joueur[1]][pos_joueur[0]]=="*":
                     nbr_etoiles+=1
-                    deplacement_sound.play(loops=0, maxtime=0, fade_ms=0)
             else:
                 nbr_murs+=1
-                print("C'est un MUR CHEHHHHH !!!!!!!!!!")
-        elif j=="g" or j=="q":
+                #screen=affichage_mur()
+        elif j=="q":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][0]=="0":
                 pos_joueur[0]-=1
                 if grille_joueur[pos_joueur[1]][pos_joueur[0]]=="*":
                     nbr_etoiles+=1
-                    deplacement_sound.play(loops=0, maxtime=0, fade_ms=0)
             else:
                 nbr_murs+=1
-                print("C'est un MUR CHEHHHHH !!!!!!!!!!")
-        elif j=="h" or j=="z":
+                #screen=affichage_mur()
+        elif j=="z":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][2]=="0":
                 pos_joueur[1]-=1
                 if grille_joueur[pos_joueur[1]][pos_joueur[0]]=="*":
                     nbr_etoiles+=1
-                    deplacement_sound.play(loops=0, maxtime=0, fade_ms=0)
             else:
                 nbr_murs+=1
-                print("C'est un MUR CHEHHHHH !!!!!!!!!!")
-        elif j=="b" or j=="s":
+                #screen=affichage_mur()
+        elif j=="s":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][3]=="0":
                 pos_joueur[1]+=1
                 if grille_joueur[pos_joueur[1]][pos_joueur[0]]=="*":
                     nbr_etoiles+=1
-                    deplacement_sound.play(loops=0, maxtime=0, fade_ms=0)
             else:
                 nbr_murs+=1
-                print("C'est un MUR CHEHHHHH !!!!!!!!!!")
+                #screen=affichage_mur()
         else:
             print(j+" : La commande n'est pas reconnu")
     grille_joueur[pos_joueur[1]][pos_joueur[0]]="O"
-    return grille_joueur,pos_joueur,nbr_etoiles,nbr_murs
+    return [grille_joueur,pos_joueur,nbr_etoiles,nbr_murs,screen]
 
-def affichage(grille_joueur,nbr_etoiles,nbr_murs,screen):
+def affichage(grille_joueur,nbr_etoiles,nbr_murs,screen,caseXY,sous_marin,etoile,case):
 
     assert type(grille_joueur)==list, "grille_joueur n'est pas une liste"
     assert type(nbr_etoiles)==int, "nbr_etoiles n'est pas un int"
     assert type(nbr_murs)==int, "nbr_murs n'est pas un int"
 
     screen.blit(background,(0,0))
-    screen.blit(background_labyrinthe,(20,10))
-    screen.blit(background_score,(1140,10))
+    screen.blit(background_labyrinthe,(0.0156*windowXY[0],0.0139*windowXY[1]))
+    screen.blit(background_score,(0.89*windowXY[0],0.0139*windowXY[1]))
+    for y in range(len(grille_joueur)):
+        for x in range(len(grille_joueur)):
+            screen.blit(case,(0.0156*windowXY[0]+x*caseXY[0]+0.05*caseXY[0],0.0139*windowXY[1]+y*caseXY[1]+0.05*caseXY[1]))
+            if grille_joueur[y][x]=='O':
+                screen.blit(sous_marin,(0.0156*windowXY[0]+x*caseXY[0]+0.05*caseXY[0],0.0139*windowXY[1]+y*caseXY[1]+0.05*caseXY[1]))
+            elif grille_joueur[y][x]=='*':
+                screen.blit(etoile,(0.0156*windowXY[0]+x*caseXY[0]+0.05*caseXY[0],0.0139*windowXY[1]+y*caseXY[1]+0.05*caseXY[1]))
+
     pygame.display.flip()
 
     return screen
@@ -178,34 +184,36 @@ def play():
     '''
     #Initialisation avec input joueur
     nbr_etoiles,nbr_murs,isPlay=0,0,True
+    sous_marin=pygame.image.load("img/sousmarin.png")
+    etoile=pygame.image.load("img/etoile.png")
 
     taille_grille=input_taille_grille()
+    caseXY=(background_labyrintheXY[0]/taille_grille,background_labyrintheXY[1]/taille_grille)
+    case=pygame.Surface((caseXY[0]*0.9,caseXY[1]*0.9))
+    case.fill((255,255,255))
+    sous_marin=pygame.transform.scale(sous_marin,(caseXY[0]*0.9,caseXY[1]*0.9))
+    etoile=pygame.transform.scale(etoile,(caseXY[0]*0.9,caseXY[1]*0.9))
 
     pos_joueur=input_pos_joueur()
 
     grille_joueur,grille_murs,pos_joueur=creation_grille_joueur(taille_grille,pos_joueur)
 
     pygame.init()
-    screen=pygame.display.set_mode((1280, 720))
-    screen.blit(background,(0,0))
-    pygame.display.flip()
+    screen=pygame.display.set_mode(windowXY)
 
     #Gestion du son/musique :
-    #musique
     son = pygame.mixer.Sound('sound/epical-music-background-337255.mp3')
     son.play(loops=-1, maxtime=0, fade_ms=0)
 
     while isPlay:#Boucle de jeu
-        screen=affichage(grille_joueur,nbr_etoiles,nbr_murs,screen)
-        pygame.time.wait(500)
-        #Instructions de jeu et mise à jour des variables
+        screen=affichage(grille_joueur,nbr_etoiles,nbr_murs,screen,caseXY,sous_marin,etoile,case)
+        pygame.time.wait(50)
         commande=""
         while commande=="":
             for event in pygame.event.get():
                 if event.type==pygame.QUIT:
                     isPlay=False
                     commande='quit'
-                    pygame.quit()
                 if event.type==pygame.KEYDOWN:
                     if event.key==pygame.K_z or event.key==pygame.K_UP:
                         commande="z"
@@ -219,7 +227,8 @@ def play():
                     commande=""
         if commande!='quit':
             grille_joueur,pos_joueur,nbr_etoiles,nbr_murs,screen=action(commande,grille_joueur,grille_murs,pos_joueur,nbr_etoiles,nbr_murs,screen) # type: ignore
-
+        else:
+            pygame.quit()
         if nbr_etoiles==taille_grille**2-1:
             print("Bien joué, tu as touché",nbr_murs,"murs et attrapé",nbr_etoiles,"étoiles. GG ou pas")
             pygame.time.wait(5000)
