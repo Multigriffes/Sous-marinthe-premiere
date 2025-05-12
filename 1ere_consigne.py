@@ -2,17 +2,39 @@ from random import randint
 from generation_liste_maps import generation_liste
 import pygame
 
+pygame.font.init()
+
+#J'ai fait une régression qui ma donner que chaque taille de font compte pour 0.6805789px pour le texte "Wasted"
+#Et que la largeur est 3.58 x la hauteur
+
 screenXY=(1920,1080)
 windowXY=(0.6*screenXY[0],0.6*screenXY[1])
 background_labyrintheXY=(0.86*windowXY[0],0.97*windowXY[1])
 background_scoreXY=(0.1*windowXY[0],0.97*windowXY[1])
+background_wastedXY=(windowXY[0],0.25*windowXY[1])
+text_wastedXY=(0.98*background_wastedXY[1]*3.58,0.98*background_wastedXY[1])
+
+taille_font_wasted=text_wastedXY[1]//0.6805789
+
+pos_background_labyrinthe=(0.0156*windowXY[0],0.0139*windowXY[1])
+pos_background_score=(0.89*windowXY[0],0.0139*windowXY[1])
+pos_background_wasted=(0,windowXY[1]/2-background_wastedXY[1]/2)
+pos_text_wasted=(windowXY[0]/2-text_wastedXY[0]/2,windowXY[1]/2-text_wastedXY[1]/2)
 
 background=pygame.image.load("img/background.jpg")
 background=pygame.transform.scale(background,windowXY)
+
 background_labyrinthe=pygame.Surface(background_labyrintheXY)
-background_score=pygame.Surface(background_scoreXY)
 background_labyrinthe.fill((0,0,0))
+
+background_score=pygame.Surface(background_scoreXY)
 background_score.fill((255,255,255))
+
+background_wasted=pygame.Surface(background_wastedXY)
+background_wasted.fill((255,0,0))
+text_wasted_font=pygame.font.SysFont(None,round(text_wastedXY[1]/0.6805789),True)
+text_wasted=pygame.font.Font.render(text_wasted_font,"Wasted",True,(255,255,255))
+
 
 #Creation des grilles
 def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
@@ -68,7 +90,7 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
                     nbr_etoiles+=1
             else:
                 nbr_murs+=1
-                #screen=affichage_mur()
+                screen=affichage_wasted(screen)
         elif j=="q":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][0]=="0":
                 pos_joueur[0]-=1
@@ -76,7 +98,7 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
                     nbr_etoiles+=1
             else:
                 nbr_murs+=1
-                #screen=affichage_mur()
+                screen=affichage_wasted(screen)
         elif j=="z":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][2]=="0":
                 pos_joueur[1]-=1
@@ -84,7 +106,7 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
                     nbr_etoiles+=1
             else:
                 nbr_murs+=1
-                #screen=affichage_mur()
+                screen=affichage_wasted(screen)
         elif j=="s":
             if grille_murs[pos_joueur[1]][pos_joueur[0]][3]=="0":
                 pos_joueur[1]+=1
@@ -92,11 +114,18 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
                     nbr_etoiles+=1
             else:
                 nbr_murs+=1
-                #screen=affichage_mur()
+                screen=affichage_wasted(screen)
         else:
             print(j+" : La commande n'est pas reconnu")
     grille_joueur[pos_joueur[1]][pos_joueur[0]]="O"
     return [grille_joueur,pos_joueur,nbr_etoiles,nbr_murs,screen]
+
+def affichage_wasted(screen):
+    screen.blit(background_wasted,pos_background_wasted)
+    screen.blit(text_wasted,pos_text_wasted)
+    pygame.display.flip()
+    pygame.time.wait(5000)
+    return screen
 
 def affichage(grille_joueur,nbr_etoiles,nbr_murs,screen,caseXY,sous_marin,etoile,case):
 
@@ -105,15 +134,15 @@ def affichage(grille_joueur,nbr_etoiles,nbr_murs,screen,caseXY,sous_marin,etoile
     assert type(nbr_murs)==int, "nbr_murs n'est pas un int"
 
     screen.blit(background,(0,0))
-    screen.blit(background_labyrinthe,(0.0156*windowXY[0],0.0139*windowXY[1]))
-    screen.blit(background_score,(0.89*windowXY[0],0.0139*windowXY[1]))
+    screen.blit(background_labyrinthe,pos_background_labyrinthe)
+    screen.blit(background_score,pos_background_score)
     for y in range(len(grille_joueur)):
         for x in range(len(grille_joueur)):
-            screen.blit(case,(0.0156*windowXY[0]+x*caseXY[0]+0.05*caseXY[0],0.0139*windowXY[1]+y*caseXY[1]+0.05*caseXY[1]))
+            screen.blit(case,(pos_background_labyrinthe[0]+(x+0.05)*caseXY[0],pos_background_labyrinthe[1]+(y+0.05)*caseXY[1]))
             if grille_joueur[y][x]=='O':
-                screen.blit(sous_marin,(0.0156*windowXY[0]+x*caseXY[0]+0.05*caseXY[0],0.0139*windowXY[1]+y*caseXY[1]+0.05*caseXY[1]))
+                screen.blit(sous_marin,(pos_background_labyrinthe[0]+(x+0.05)*caseXY[0],pos_background_labyrinthe[1]+(y+0.05)*caseXY[1]))
             elif grille_joueur[y][x]=='*':
-                screen.blit(etoile,(0.0156*windowXY[0]+x*caseXY[0]+0.05*caseXY[0],0.0139*windowXY[1]+y*caseXY[1]+0.05*caseXY[1]))
+                screen.blit(etoile,(pos_background_labyrinthe[0]+(x+0.05)*caseXY[0],pos_background_labyrinthe[1]+(y+0.05)*caseXY[1]))
 
     pygame.display.flip()
 
