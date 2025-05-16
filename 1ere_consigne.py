@@ -13,7 +13,7 @@ background_labyrintheXY=(0.86*windowXY[0],0.97*windowXY[1])
 background_scoreXY=(0.1*windowXY[0],0.97*windowXY[1])
 background_wastedXY=(windowXY[0],0.25*windowXY[1])
 text_wastedXY=(0.98*background_wastedXY[1]*3.58,0.98*background_wastedXY[1])
-victory_bannerXY=(0.5*windowXY[0], 0.5*windowXY[1])
+victory_bannerXY=(0.8*windowXY[0], 0.8*windowXY[1])
 
 taille_font_wasted=text_wastedXY[1]//0.6805789
 
