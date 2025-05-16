@@ -7,6 +7,8 @@ pygame.font.init()
 #J'ai fait une régression qui ma donner que chaque taille de font compte pour 0.6805789px pour le texte "Wasted"
 #Et que la largeur est 3.58 x la hauteur
 
+bop = pygame.mixer.Sound("sound/pop-331049.mp3")
+
 screenXY=(1920,1080)
 windowXY=(0.6*screenXY[0],0.6*screenXY[1])
 background_labyrintheXY=(0.86*windowXY[0],0.97*windowXY[1])
@@ -129,6 +131,7 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,pos_
             print(j+" : La commande n'est pas reconnu")
     grille_joueur[pos_joueur[1]][pos_joueur[0]]="O"
     grille_joueur[pos_sortie[1]][pos_sortie[0]]="S"
+    bop.play(loop=0, maxtime=0, fade_ms=0)
     return [grille_joueur,pos_joueur,nbr_murs,screen]
 
 def affichage_wasted(screen):
@@ -272,11 +275,12 @@ def play():
             screen=affichage(grille_joueur, nbr_murs, screen, caseXY, sous_marin, sortie, case)
             screen.blit(victory_banner, pos_victory_banner)
 
+            pygame.mixer.Sound.stop()
             son_victory = pygame.mixer.Sound('sound/Voicy_macarena.mp3')
             son_victory.play(loops=0, maxtime=0, fade_ms=0)
 
             pygame.display.flip()
             print("Bien joué, tu as recommencé",nbr_murs,"fois avant de gagner. GG ou pas")
-            pygame.time.wait(19000)
+            pygame.time.wait(20000)
             isPlay=False
             pygame.quit()
