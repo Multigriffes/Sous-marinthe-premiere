@@ -54,10 +54,10 @@ def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
         if pos_joueur[0] > taille_grille-1 or pos_joueur[1] > taille_grille-1:
             print("Position hors du terrain, génération aléatoire...")
             pos_joueur=[]
-        if len(pos_joueur)!=2 and len(pos_joueur)!=0:
+        if len(pos_joueur)!=2:
             print("Y a 2 nombres pour une coordonnées en 2D idiots, génération aléatoire...")
             pos_joueur=[]
-    if pos_joueur == []:
+    else:
         pos_joueur = [randint(0,taille_grille-1), randint(0,taille_grille-1)]
 
     #Création de la grille du joueur
@@ -124,7 +124,7 @@ def affichage_wasted(screen):
     screen.blit(background_wasted,pos_background_wasted)
     screen.blit(text_wasted,pos_text_wasted)
     pygame.display.flip()
-    pygame.time.wait(5000)
+    pygame.time.wait(1000)
     return screen
 
 def affichage(grille_joueur,nbr_etoiles,nbr_murs,screen,caseXY,sous_marin,etoile,case):
