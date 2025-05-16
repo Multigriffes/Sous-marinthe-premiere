@@ -3,6 +3,7 @@ from generation_liste_maps import generation_liste
 import pygame
 
 pygame.font.init()
+pygame.mixer.init()
 
 #J'ai fait une régression qui ma donner que chaque taille de font compte pour 0.6805789px pour le texte "Wasted"
 #Et que la largeur est 3.58 x la hauteur
@@ -87,6 +88,8 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
     assert type(pos_joueur) == list, "pos_joueur n'est pas un list"
     assert type(nbr_etoiles) == int, "nbr_etoiles n'est pas un int"
     assert type(nbr_murs) == int, "nbr_murs n'est pas un int"
+    bop.play(loops=0, maxtime=0, fade_ms=0)
+
     
     for j in commande:
         grille_joueur[pos_joueur[1]][pos_joueur[0]]=" "
@@ -125,7 +128,6 @@ def action(commande:str,grille_joueur:list,grille_murs:list,pos_joueur:list,nbr_
         else:
             print(j+" : La commande n'est pas reconnu")
     grille_joueur[pos_joueur[1]][pos_joueur[0]]="O"
-    bop.play(loop=0, maxtime=0, fade_ms=0)
     return [grille_joueur,pos_joueur,nbr_etoiles,nbr_murs,screen]
 
 def affichage_wasted(screen):
@@ -270,7 +272,7 @@ def play():
             screen=affichage(grille_joueur,nbr_etoiles,nbr_murs,screen,caseXY,sous_marin,etoile,case)
             screen.blit(victory_banner, pos_victory_banner)
 
-            pygame.mixer.Sound.stop()
+            pygame.mixer.Sound.stop(son)
             son_victory = pygame.mixer.Sound('sound/Voicy_macarena.mp3')
             son_victory.play(loops=0, maxtime=0, fade_ms=0)
 
