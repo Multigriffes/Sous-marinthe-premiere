@@ -13,6 +13,7 @@ background_labyrintheXY=(0.86*windowXY[0],0.97*windowXY[1])
 background_scoreXY=(0.1*windowXY[0],0.97*windowXY[1])
 background_wastedXY=(windowXY[0],0.25*windowXY[1])
 text_wastedXY=(0.98*background_wastedXY[1]*3.58,0.98*background_wastedXY[1])
+victory_bannerXY=(0.5*windowXY[0], 0.5*windowXY[1])
 
 taille_font_wasted=text_wastedXY[1]//0.6805789
 
@@ -20,11 +21,13 @@ pos_background_labyrinthe=(0.0156*windowXY[0],0.0139*windowXY[1])
 pos_background_score=(0.89*windowXY[0],0.0139*windowXY[1])
 pos_background_wasted=(0,windowXY[1]/2-background_wastedXY[1]/2)
 pos_text_wasted=(windowXY[0]/2-text_wastedXY[0]/2,windowXY[1]/2-text_wastedXY[1]/2)
+pos_victory_banner=(windowXY[0]/2-victory_bannerXY[0]/2, windowXY[1]/2-victory_bannerXY[1]/2)
 
 background=pygame.image.load("img/background.jpg")
 background=pygame.transform.scale(background,windowXY)
 
-victory_banner=pygame.image.load("")
+victory_banner=pygame.image.load("victoire.png")
+victory_banner=pygame.transform.scale(victory_banner,victory_bannerXY)
 
 background_labyrinthe=pygame.Surface(background_labyrintheXY)
 background_labyrinthe.fill((0,0,0))
@@ -267,6 +270,8 @@ def play():
             pygame.quit()
         if pos_joueur==pos_sortie:
             screen=affichage(grille_joueur, nbr_murs, screen, caseXY, sous_marin, sortie, case)
+            screen.blit(victory_banner, pos_victory_banner)
+            pygame.display.flip()
             print("Bien joué, tu as recommencé",nbr_murs,"fois avant de gagner. GG ou pas")
             pygame.time.wait(5000)
             isPlay=False
