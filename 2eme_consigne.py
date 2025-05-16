@@ -26,7 +26,7 @@ pos_victory_banner=(windowXY[0]/2-victory_bannerXY[0]/2, windowXY[1]/2-victory_b
 background=pygame.image.load("img/background.jpg")
 background=pygame.transform.scale(background,windowXY)
 
-victory_banner=pygame.image.load("victoire.png")
+victory_banner=pygame.image.load("img/victoire.png")
 victory_banner=pygame.transform.scale(victory_banner,victory_bannerXY)
 
 background_labyrinthe=pygame.Surface(background_labyrintheXY)
