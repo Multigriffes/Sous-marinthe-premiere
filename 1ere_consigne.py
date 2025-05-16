@@ -24,6 +24,8 @@ pos_text_wasted=(windowXY[0]/2-text_wastedXY[0]/2,windowXY[1]/2-text_wastedXY[1]
 background=pygame.image.load("img/background.jpg")
 background=pygame.transform.scale(background,windowXY)
 
+victory_banner=pygame.image.load("")
+
 background_labyrinthe=pygame.Surface(background_labyrintheXY)
 background_labyrinthe.fill((0,0,0))
 
@@ -259,6 +261,7 @@ def play():
         else:
             pygame.quit()
         if nbr_etoiles==taille_grille**2-1:
+            screen=affichage(grille_joueur,nbr_etoiles,nbr_murs,screen,caseXY,sous_marin,etoile,case)
             print("Bien joué, tu as touché",nbr_murs,"murs et attrapé",nbr_etoiles,"étoiles. GG ou pas")
             pygame.time.wait(5000)
             isPlay=False

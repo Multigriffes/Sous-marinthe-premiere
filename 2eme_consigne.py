@@ -24,6 +24,8 @@ pos_text_wasted=(windowXY[0]/2-text_wastedXY[0]/2,windowXY[1]/2-text_wastedXY[1]
 background=pygame.image.load("img/background.jpg")
 background=pygame.transform.scale(background,windowXY)
 
+victory_banner=pygame.image.load("")
+
 background_labyrinthe=pygame.Surface(background_labyrintheXY)
 background_labyrinthe.fill((0,0,0))
 
@@ -264,6 +266,7 @@ def play():
         else:
             pygame.quit()
         if pos_joueur==pos_sortie:
+            screen=affichage(grille_joueur, nbr_murs, screen, caseXY, sous_marin, sortie, case)
             print("Bien joué, tu as recommencé",nbr_murs,"fois avant de gagner. GG ou pas")
             pygame.time.wait(5000)
             isPlay=False
