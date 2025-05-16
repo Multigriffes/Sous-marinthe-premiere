@@ -271,8 +271,12 @@ def play():
         if pos_joueur==pos_sortie:
             screen=affichage(grille_joueur, nbr_murs, screen, caseXY, sous_marin, sortie, case)
             screen.blit(victory_banner, pos_victory_banner)
+
+            son_victory = pygame.mixer.Sound('sound/Voicy_macarena.mp3')
+            son_victory.play(loops=0, maxtime=0, fade_ms=0)
+
             pygame.display.flip()
             print("Bien joué, tu as recommencé",nbr_murs,"fois avant de gagner. GG ou pas")
-            pygame.time.wait(5000)
+            pygame.time.wait(19000)
             isPlay=False
             pygame.quit()

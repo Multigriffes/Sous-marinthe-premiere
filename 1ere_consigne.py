@@ -266,8 +266,12 @@ def play():
         if nbr_etoiles==taille_grille**2-1:
             screen=affichage(grille_joueur,nbr_etoiles,nbr_murs,screen,caseXY,sous_marin,etoile,case)
             screen.blit(victory_banner, pos_victory_banner)
+
+            son_victory = pygame.mixer.Sound('sound/Voicy_macarena.mp3')
+            son_victory.play(loops=0, maxtime=0, fade_ms=0)
+
             pygame.display.flip()
             print("Bien joué, tu as touché",nbr_murs,"murs et attrapé",nbr_etoiles,"étoiles. GG ou pas")
-            pygame.time.wait(5000)
+            pygame.time.wait(19000)
             isPlay=False
             pygame.quit()
