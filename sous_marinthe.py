@@ -96,39 +96,40 @@ def size_computing_menu_taille_grille(window):
     # Taille des surfaces
     windowXY=window.get_size()
     backgroundXY=(windowXY[0]*1,windowXY[1]*1)
-    titleXY=(backgroundXY[0]*0.8,backgroundXY[1]*0.3)
-    background_mode_jeuXY=(backgroundXY[0]*0.3,backgroundXY[1]*0.5)
-    icon_mode_jeuXY=(0.775*background_mode_jeuXY[0],0.7*background_mode_jeuXY[1])
-    text_mode_jeuXY=(0.8*background_mode_jeuXY[0],0.22*background_mode_jeuXY[1])
-    text_createursXY=(0.4*backgroundXY[0],backgroundXY[1]*0.05)
+    titleXY=(backgroundXY[0]*0.8,backgroundXY[1]*0.15)
+    background_tailleXY=(backgroundXY[0]*0.08,backgroundXY[1]*0.1)
+    text_tailleXY=(1*background_tailleXY[0],1*background_tailleXY[1])
 
 # ____________________________________________________________
     # Création des surfaces pleine
-    background_mode_jeu=pygame.Surface(background_mode_jeuXY)
-    background_mode_jeu.fill((110, 105, 92))
+
 
 # ____________________________________________________________
     # Scaling des élèments
     background=pygame.transform.scale(background_image,backgroundXY)
     title=pygame.transform.scale(title,titleXY)
-    icon_mode_jeu_1=pygame.transform.scale(etoile_image,icon_mode_jeuXY)
-    icon_mode_jeu_2=pygame.transform.scale(porte_image,icon_mode_jeuXY)
-    text_mode_jeu_1=pygame.transform.scale(text_mode_jeu_1,text_mode_jeuXY)
-    text_mode_jeu_2=pygame.transform.scale(text_mode_jeu_2,text_mode_jeuXY)
-    text_createurs=pygame.transform.scale(text_createurs,text_createursXY)
-
+    text_taille_2=pygame.transform.scale(text_taille_2,text_tailleXY)
+    text_taille_3=pygame.transform.scale(text_taille_3,text_tailleXY)
+    text_taille_4=pygame.transform.scale(text_taille_4,text_tailleXY)
+    text_taille_5=pygame.transform.scale(text_taille_5,text_tailleXY)
+    text_taille_6=pygame.transform.scale(text_taille_6,text_tailleXY)
+    text_taille_7=pygame.transform.scale(text_taille_7,text_tailleXY)
+    text_taille_8=pygame.transform.scale(text_taille_8,text_tailleXY)
+    text_taille_9=pygame.transform.scale(text_taille_9,text_tailleXY)
+    text_taille_10=pygame.transform.scale(text_taille_10,text_tailleXY)
+    text_taille_11=pygame.transform.scale(text_taille_11,text_tailleXY)
+    text_taille_12=pygame.transform.scale(text_taille_12,text_tailleXY)
+    text_taille_13=pygame.transform.scale(text_taille_13,text_tailleXY)
+    text_taille_14=pygame.transform.scale(text_taille_14,text_tailleXY)
+    text_taille_15=pygame.transform.scale(text_taille_15,text_tailleXY)
     
 # ____________________________________________________________
     # Position des élèments
     background_pos=(0,0)
     title_pos=(backgroundXY[0]/2-titleXY[0]/2,backgroundXY[1]*0.03)
     background_mode_jeu_1_pos=(backgroundXY[0]*0.13,backgroundXY[1]*0.35)
-    background_mode_jeu_2_pos=(backgroundXY[0]-backgroundXY[0]*0.13-background_mode_jeuXY[0],backgroundXY[1]*0.35)
-    icon_mode_jeu_1_pos=(background_mode_jeu_1_pos[0]+background_mode_jeuXY[0]/2-icon_mode_jeuXY[0]/2,background_mode_jeu_1_pos[1]+background_mode_jeuXY[1]*0.01)
-    icon_mode_jeu_2_pos=(background_mode_jeu_2_pos[0]+background_mode_jeuXY[0]/2-icon_mode_jeuXY[0]/2,background_mode_jeu_2_pos[1]+background_mode_jeuXY[1]*0.01)
-    text_mode_jeu_1_pos=(background_mode_jeu_1_pos[0]+background_mode_jeuXY[0]/2-text_mode_jeuXY[0]/2,background_mode_jeu_1_pos[1]+background_mode_jeuXY[1]*0.75)
-    text_mode_jeu_2_pos=(background_mode_jeu_2_pos[0]+background_mode_jeuXY[0]/2-text_mode_jeuXY[0]/2,background_mode_jeu_2_pos[1]+background_mode_jeuXY[1]*0.75)
-    text_createurs_pos=(background_mode_jeuXY[0]*0.05,backgroundXY[1]-text_createursXY[1])
+    background_mode_jeu_2_pos=(backgroundXY[0]-backgroundXY[0]*0.13-background_tailleXY[0],backgroundXY[1]*0.35)
+    text_createurs_pos=(background_tailleXY[0]*0.05,backgroundXY[1]-text_createursXY[1])
 
 # ____________________________________________________________
 
@@ -163,7 +164,7 @@ def affichage_menu_taille_grille(window):
 def action(etape,event):
     if etape==0:
         if event.type==pygame.MOUSEBUTTONDOWN:
-            windowXY,backgroundXY,titleXY,background_mode_jeuXY,icon_mode_jeuXY,text_mode_jeuXY,text_createursXY,background_mode_jeu,background,title,icon_mode_jeu_1,icon_mode_jeu_2,text_mode_jeu_1,text_mode_jeu_2,text_createurs,background_pos,title_pos,background_mode_jeu_1_pos,background_mode_jeu_2_pos,icon_mode_jeu_1_pos,icon_mode_jeu_2_pos,text_mode_jeu_1_pos,text_mode_jeu_2_pos,text_createurs_pos=size_computing_menu_mode_jeu(window)
+            background_mode_jeuXY,background_mode_jeu,background,title,icon_mode_jeu_1,icon_mode_jeu_2,text_mode_jeu_1,text_mode_jeu_2,text_createurs,background_pos,title_pos,background_mode_jeu_1_pos,background_mode_jeu_2_pos,icon_mode_jeu_1_pos,icon_mode_jeu_2_pos,text_mode_jeu_1_pos,text_mode_jeu_2_pos,text_createurs_pos=size_computing_menu_mode_jeu(window)
             if background_mode_jeu_1_pos[0]<pygame.mouse.get_pos()[0]<background_mode_jeu_1_pos[0]+background_mode_jeuXY[0] and background_mode_jeu_1_pos[1]<pygame.mouse.get_pos()[1]<background_mode_jeu_1_pos[1]+background_mode_jeuXY[1]:
                 etape=1  
             elif background_mode_jeu_2_pos[0]<pygame.mouse.get_pos()[0]<background_mode_jeu_2_pos[0]+background_mode_jeuXY[0] and background_mode_jeu_2_pos[1]<pygame.mouse.get_pos()[1]<background_mode_jeu_2_pos[1]+background_mode_jeuXY[1]:
@@ -237,12 +238,8 @@ while run:
             run=False
         elif event.type==pygame.KEYDOWN or event.type==pygame.MOUSEBUTTONDOWN:
             etape=action(etape,event)
-            print("1")
+            print("Action de l'utilisateur")
         elif event.type==pygame.VIDEORESIZE or event.type==pygame.VIDEOEXPOSE:
-            print("2")
-        elif event.type==pygame.MOUSEBUTTONDOWN:
-            pass
-        elif event.type==pygame.MOUSEMOTION:
-            pass
+            print("Window size changed")
     window=affichage(window,etape)
 pygame.quit()
