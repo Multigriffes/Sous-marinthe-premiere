@@ -1,6 +1,6 @@
 from random import randint
-from generation_liste_maps import generation_liste
-from lib import *
+from lib.generation_liste_maps import generation_liste
+from lib.input import *
 
 #Creation des grilles
 def creation_grille_joueur(taille_grille:int,pos_joueur:list=[]):
