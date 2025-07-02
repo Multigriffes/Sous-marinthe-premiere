@@ -1,5 +1,5 @@
 from random import randint
-from generation_liste_maps import generation_liste
+from lib.generation_liste_maps import generation_liste
 import pygame
 pygame.init()
 
